@@ -21,3 +21,5 @@ npm install
 npm start
 ```
 
+![sample](img.png)
+
