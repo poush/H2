@@ -6,16 +6,25 @@ const {app, BrowserWindow, clipboard, globalShortcut} = require('electron')
 let mainWindow
 
 function createWindow () {
-  // Create the browser window.
-  mainWindow = new BrowserWindow({width: 400, height: 300})
 
+  // cfeate config
+  let config = {width: 400, height: 300, frame: false}
+
+
+  // set frame for macOS
+  // if (process.platform == 'darwin') {
+  //   config.frame = true
+  //   config.titleBarStyle = 'hidden'
+  // }
+
+  // Create the browser window.
+  mainWindow = new BrowserWindow(config)
 
   // Set always on top
   app.dock.hide();
   mainWindow.setAlwaysOnTop(true, "floating");
   mainWindow.setVisibleOnAllWorkspaces(true);
   mainWindow.setFullScreenable(false);
-  app.dock.show();
 
   // and load the index.html of the app.
   mainWindow.loadFile('index.html')
@@ -47,9 +56,9 @@ app.on('ready', createWindow)
 app.on('window-all-closed', function () {
   // On OS X it is common for applications and their menu bar
   // to stay active until the user quits explicitly with Cmd + Q
-  if (process.platform !== 'darwin') {
-    app.quit()
-  }
+  // if (process.platform !== 'darwin') {
+  app.quit()
+  // }
 })
 
 app.on('activate', function () {
