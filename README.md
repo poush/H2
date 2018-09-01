@@ -1,6 +1,6 @@
 # h2
 
-Currently works for youtube only, just paste any url on the browser view andd video will start.
+Currently works for youtube only, Copy any youtube url and press Ctrl/Command + Shift + V
 
 Inspired from Helium app. 
 
