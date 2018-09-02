@@ -31,7 +31,13 @@ function generateYoutubeUrl(url) {
   }
 }
 
+
 ipcRenderer.on('newlink', (ev, arg) => {
 	pasted()
 })
+
+
+ipcRenderer.on('newframe', (ev, arg) => {
+	document.querySelector('#video').innerHTML = arg
+}) 
 
