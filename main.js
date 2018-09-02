@@ -1,21 +1,15 @@
 // Modules to control application life and create native browser window
-const {app, BrowserWindow, clipboard, globalShortcut} = require('electron')
+const {app, Menu, Tray, BrowserWindow, globalShortcut} = require('electron')
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow
+let tray
 
 function createWindow () {
 
   // cfeate config
   let config = {width: 400, height: 300, frame: false}
-
-
-  // set frame for macOS
-  // if (process.platform == 'darwin') {
-  //   config.frame = true
-  //   config.titleBarStyle = 'hidden'
-  // }
 
   // Create the browser window.
   mainWindow = new BrowserWindow(config)
@@ -47,10 +41,28 @@ function createWindow () {
 
 }
 
+let createMenuTray = () => {
+    tray = new Tray('icon.png')
+    const contextMenu = Menu.buildFromTemplate([
+        {role: 'about'},
+        {label: 'Quit', click() {app.quit()} }
+    ])
+    tray.setToolTip('H2')
+    tray.setContextMenu(contextMenu)
+    tray.on('click', function (event) {
+        console.log('called')
+        !mainWindow.isFocused() ? mainWindow.focus(): true;
+    })
+
+}
+
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
-app.on('ready', createWindow)
+app.on('ready', () => {
+    createWindow()
+    createMenuTray()
+})
 
 // Quit when all windows are closed.
 app.on('window-all-closed', function () {
