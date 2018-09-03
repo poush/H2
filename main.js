@@ -26,8 +26,8 @@ function createWindow () {
   mainWindow.setFullScreenable(false);
 
   // and load the index.html of the app.
-  // mainWindow.loadFile('index.html')
-  mainWindow.loadURL('https://www.netflix.com')
+  mainWindow.loadFile('index.html')
+  // mainWindow.loadURL('https://www.netflix.com')
 
   // Open the DevTools.
   // mainWindow.webContents.openDevTools()
