@@ -1,9 +1,6 @@
 // Modules to control application life and create native browser window
 const {app, Menu, Tray, BrowserWindow, globalShortcut, session} = require('electron')
 
-app.commandLine.appendSwitch('remote-debugging-port', '8315');
-app.commandLine.appendSwitch('host-rules', 'MAP * 127.0.0.1');
-
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow
@@ -12,10 +9,11 @@ let tray
 function createWindow () {
 
   // cfeate config
-  let config = {width: 400, height: 300, frame: false}
+  let config = {width: 400, height: 300}
 
   // Create the browser window.
   mainWindow = new BrowserWindow(config)
+  mainWindow.setMenu(null)
 
   // Set always on top
   if(process.platform == 'darwin')
