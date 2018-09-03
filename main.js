@@ -18,7 +18,9 @@ function createWindow () {
   mainWindow = new BrowserWindow(config)
 
   // Set always on top
-  app.dock.hide();
+  if(process.platform == 'darwin')
+    app.dock.hide()
+
   mainWindow.setAlwaysOnTop(true, "floating");
   mainWindow.setVisibleOnAllWorkspaces(true);
   mainWindow.setFullScreenable(false);
