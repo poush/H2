@@ -10,7 +10,13 @@ let tray
 function createWindow () {
 
   // cfeate config
-  let config = {width: 400, height: 300}
+  let config = {
+    width: 400,
+    height: 300,
+    webPreferences: {
+      plugins: true
+    }
+  }
 
   // Create the browser window.
   mainWindow = new BrowserWindow(config)
@@ -29,7 +35,7 @@ function createWindow () {
   // mainWindow.loadURL('https://www.netflix.com')
 
   // Open the DevTools.
-  mainWindow.webContents.openDevTools()
+  // mainWindow.webContents.openDevTools()
 
   // Emitted when the window is closed.
   mainWindow.on('closed', function () {

@@ -2,18 +2,19 @@
 * @Author: Piyush Agrawal
 * @Date:   2018-09-03 02:35:32
 * @Last Modified by:   Piyush Agrawal
-* @Last Modified time: 2018-09-06 03:34:04
+* @Last Modified time: 2018-09-06 03:46:47
 */
 
 import {youtubeProvider} from './MediaProviders/youtube'
+import {pdfProvider} from './MediaProviders/pdf'
 import applyMedia from './mediaProviderApplier'
 import {clipboard} from 'electron'
 
-console.log(youtubeProvider)
+
 let matchers = {
 
-	'youtube' : new youtubeProvider()
-
+	'youtube' : new youtubeProvider(),
+	'pdf': new pdfProvider()
 }
 
 module.exports = {

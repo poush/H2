@@ -2,7 +2,7 @@
 * @Author: Piyush Agrawal
 * @Date:   2018-09-03 02:35:50
 * @Last Modified by:   Piyush Agrawal
-* @Last Modified time: 2018-09-06 03:28:00
+* @Last Modified time: 2018-09-06 03:49:49
 */
 import baseMediaProvider from './baseMediaProvider'
 
