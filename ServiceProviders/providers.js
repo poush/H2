@@ -2,7 +2,7 @@
 * @Author: Piyush Agrawal
 * @Date:   2018-09-03 02:35:32
 * @Last Modified by:   Piyush Agrawal
-* @Last Modified time: 2018-09-06 03:00:38
+* @Last Modified time: 2018-09-06 03:34:04
 */
 
 import {youtubeProvider} from './MediaProviders/youtube'
@@ -30,7 +30,8 @@ module.exports = {
 		}
 
 		if(provider == null){
-			win.webContents.send('invalidprovider', 'ping')
+			win.webContents.send('invalidUrl', 'ping')
+			return
 		}
 
 		applyMedia(matchers[provider].getContent, win)
