@@ -77,6 +77,11 @@ app.on('window-all-closed', function () {
   app.quit()
   // }
 })
+// Unregister all shortcuts.
+app.on('will-quit', () => {
+  globalShortcut.unregisterAll()
+  
+})
 
 app.on('activate', function () {
   // On OS X it's common to re-create a window in the app when the
