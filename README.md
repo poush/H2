@@ -1,6 +1,6 @@
 # h2
 
-Currently works for youtube only, Copy any youtube url and press Ctrl/Command + Shift + V
+Currently works for youtube and pdf files, Copy any youtube or PDF url and press Ctrl/Command + Shift + V
 
 Inspired from Helium app. 
 
