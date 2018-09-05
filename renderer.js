@@ -21,23 +21,22 @@ let apiPromise  = new Promise(resolve => {
 async function pasted() {
 	let url = clipboard.readText('selection')
 	if(web = generateYoutubeUrl(url)) {
-    await apiPromise
-    player = new YT.Player(document.querySelector("#video"), {
-      height: '100%',
-      width: '100%',
-      videoId: web,
-      playerVars: { 'autoplay': 1},
-      events: {
-        onReady: (event) => {
-        // console.log(event)
-        },
-        onStateChange: (event) => {
-          // console.log(event)
-        }
-      }
-    });
-
-   }
+        await apiPromise
+        player = new YT.Player(document.querySelector("#video"), {
+          height: '100%',
+          width: '100%',
+          videoId: web,
+          playerVars: { 'autoplay': 1},
+          events: {
+            onReady: (event) => {
+            // console.log(event)
+            },
+            onStateChange: (event) => {
+              // console.log(event)
+            }
+          }
+        });
+    }
 	else
 	  alert("Invalid Url, we only support youtube for now");
 }
