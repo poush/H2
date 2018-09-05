@@ -2,15 +2,17 @@
 * @Author: Piyush Agrawal
 * @Date:   2018-09-03 02:35:50
 * @Last Modified by:   Piyush Agrawal
-* @Last Modified time: 2018-09-03 03:26:07
+* @Last Modified time: 2018-09-06 03:28:00
 */
 import baseMediaProvider from './baseMediaProvider'
 
-class youtubeProvider extends baseMediaProvider {
+export class youtubeProvider extends baseMediaProvider {
 	
 	constructor(){
+		super()
 		this.name = 'youtube'
-		this.response.type = 'frame'
+		this.response.type = 'iframe'
+		this.response.eventName = 'youtube'
 	}
 
 	matcher(link){
@@ -28,12 +30,12 @@ class youtubeProvider extends baseMediaProvider {
 	}
 
 	extractContents(link) {
-		let match = matcher(link)
-	  	let web =  'https://www.youtube.com/embed/' + match + '?autoplay=1&enablejsapi=1'
-	  	this.response.content = `<iframe style="position:fixed; top:0px; left:0px; bottom:0px; right:0px; width:100%; height:100%; border:none; margin:0; padding:0; overflow:hidden; z-index:999999;" src="${web}"></iframe>`
+		let match = this.matcher(link)
+		this.response.content = match
+	  	// let web =  'https://www.youtube.com/embed/' + match + '?autoplay=1&enablejsapi=1'
+	  	// this.response.content = `<iframe style="position:fixed; top:0px; left:0px; bottom:0px; right:0px; width:100%; height:100%; border:none; margin:0; padding:0; overflow:hidden; z-index:999999;" src="${web}"></iframe>`
 
-	  	return this.response
-
+	  	return true
 	}
 
 }

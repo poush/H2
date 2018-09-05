@@ -1,5 +1,6 @@
 // Modules to control application life and create native browser window
 const {app, Menu, Tray, BrowserWindow, globalShortcut, session} = require('electron')
+const providers  = require('./ServiceProviders/providers')
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -28,7 +29,7 @@ function createWindow () {
   // mainWindow.loadURL('https://www.netflix.com')
 
   // Open the DevTools.
-  // mainWindow.webContents.openDevTools()
+  mainWindow.webContents.openDevTools()
 
   // Emitted when the window is closed.
   mainWindow.on('closed', function () {
@@ -40,7 +41,8 @@ function createWindow () {
 
 
   globalShortcut.register('CommandOrControl+Shift+V', () => {
-    mainWindow.webContents.send('newlink', 'ping')
+    providers.run(mainWindow)
+    // mainWindow.webContents.send('newlink', 'ping')
   })
   globalShortcut.register('CommandOrControl+Shift+1', () => {
     mainWindow.webContents.send('pause', 'ping')

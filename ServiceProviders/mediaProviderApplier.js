@@ -2,21 +2,23 @@
 * @Author: Piyush Agrawal
 * @Date:   2018-09-03 03:13:59
 * @Last Modified by:   Piyush Agrawal
-* @Last Modified time: 2018-09-03 03:35:27
+* @Last Modified time: 2018-09-06 03:25:54
 */
 
 
-export default applyMedia(toApply, win) => {
+export default function (toApply, win){
 
 	if(typeof toApply == 'object'){
 
 		if(toApply.type === 'iframe'){
-			win.loadFile('../index.html')
-    		win.webContents.send('newframe', this.response.content)
+			win.loadFile('./index.html')
+			win.webContents.once('dom-ready', () => {
+    			win.webContents.send(toApply.eventName, toApply.content)
+			})
 		}
 
 		else {
-			win.loadURL(this.response.content)
+			win.loadURL(toApply.content)
 		}
 
 	}

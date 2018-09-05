@@ -18,27 +18,23 @@ let apiPromise  = new Promise(resolve => {
 });
 
 
-async function pasted() {
-	let url = clipboard.readText('selection')
-	if(web = generateYoutubeUrl(url)) {
-        await apiPromise
-        player = new YT.Player(document.querySelector("#video"), {
-          height: '100%',
-          width: '100%',
-          videoId: web,
-          playerVars: { 'autoplay': 1},
-          events: {
-            onReady: (event) => {
-            // console.log(event)
-            },
-            onStateChange: (event) => {
-              // console.log(event)
-            }
-          }
-        });
-    }
-	else
-	  alert("Invalid Url, we only support youtube for now");
+async function putYoutube (videoId) {
+
+    await apiPromise
+    player = new YT.Player(document.querySelector("#video"), {
+      height: '100%',
+      width: '100%',
+      videoId: videoId,
+      playerVars: { 'autoplay': 1},
+      events: {
+        onReady: (event) => {
+        // console.log(event)
+        },
+        onStateChange: (event) => {
+          // console.log(event)
+        }
+      }
+    });
 }
 
 function pause() {
@@ -56,25 +52,7 @@ function play() {
    alert("Play a video first");
   }
  }
-function generateYoutubeUrl(url) {    
-  if (url != undefined || url != '') {        
-      var regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=|\?v=)([^#\&\?]*).*/;
-      var match = url.match(regExp);
-      if (match && match[2].length == 11) {
-          // Do anything for being valid
-          // if need to change the url to embed url then use below line            
-          // let web =  'https://www.youtube.com/embed/' + match[2] + '?autoplay=1&version=3&enablejsapi=1'
-          return match[2]
-      } else {
-        return false;
-      }
-  }
-}
 
-
-ipcRenderer.on('newlink', (ev, arg) => {
-	pasted()
-})
 
 ipcRenderer.on('pause', (ev, arg) => {
 	pause()
@@ -84,7 +62,10 @@ ipcRenderer.on('play', (ev, arg) => {
 	play()
 })
 
-ipcRenderer.on('newframe', (ev, arg) => {
-	document.querySelector('#video').innerHTML = arg
+ipcRenderer.on('youtube', (ev, arg) => {
+	putYoutube(arg)
 }) 
 
+ipcRenderer.on('invalidUrl', () => {
+	alert('Oops! This isn\'t supported URL')
+})

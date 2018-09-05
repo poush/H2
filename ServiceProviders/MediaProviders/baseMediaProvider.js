@@ -2,31 +2,30 @@
 * @Author: Piyush Agrawal
 * @Date:   2018-09-03 02:37:16
 * @Last Modified by:   Piyush Agrawal
-* @Last Modified time: 2018-09-03 03:25:06
+* @Last Modified time: 2018-09-06 03:30:48
 */
+import {clipboard} from 'electron'
+
 export default class baseMediaProvider {
 
 	constructor() {
 		this.version = '0.1'
 		this.name = 'base'
 		this.response = {
+			eventName: 'default',
 			type: 'link',
 			content: ''
 		}
 	}
 
 	get getContent() {
-		link = clipboard.readText('selection')
-
-		if(content = this.extractContent(link)){
-
-			if(typeof content == 'object'){
-				return content
-			}
-
-			throw "InvalidContentByContentExtraction"
-
+		let link = clipboard.readText('selection')
+		if(this.extractContents(link)){
+			// console.log(this.response)
+			return this.response
 		}
+
+		throw "InvalidContentByContentExtraction"
 	}
 
 	matcher(link) {
@@ -36,6 +35,7 @@ export default class baseMediaProvider {
 	//method
 	extractContents(link=null) {
 		// to be implemented by inheriting objects
+		return true
 	}
 
 }
