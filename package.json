@@ -18,6 +18,6 @@
   "license": "CC0-1.0",
   "devDependencies": {
     "electron": "^2.0.0",
-    "electron-builder": "^20.28.3"
+    "electron-prebuilt-compile": "^2.0.7"
   }
 }
