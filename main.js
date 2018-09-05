@@ -42,7 +42,12 @@ function createWindow () {
   globalShortcut.register('CommandOrControl+Shift+V', () => {
     mainWindow.webContents.send('newlink', 'ping')
   })
-
+  globalShortcut.register('CommandOrControl+Shift+1', () => {
+    mainWindow.webContents.send('pause', 'ping')
+  })
+  globalShortcut.register('CommandOrControl+Shift+2', () => {
+    mainWindow.webContents.send('play', 'ping')
+  })
 }
 
 let createMenuTray = () => {
@@ -68,6 +73,12 @@ app.on('ready', () => {
     createWindow()
     createMenuTray()
 })
+
+app.on('will-quit', () => {
+  // Unregister all shortcuts.
+  globalShortcut.unregisterAll()
+})
+
 
 // Quit when all windows are closed.
 app.on('window-all-closed', function () {
