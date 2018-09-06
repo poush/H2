@@ -1,10 +1,3 @@
-/*
-* @Author: Piyush Agrawal
-* @Date:   2018-09-03 02:35:32
-* @Last Modified by:   Piyush Agrawal
-* @Last Modified time: 2018-09-06 03:46:47
-*/
-
 import {youtubeProvider} from './MediaProviders/youtube'
 import {pdfProvider} from './MediaProviders/pdf'
 import applyMedia from './mediaProviderApplier'

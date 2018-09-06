@@ -3,6 +3,8 @@
 // All of the Node.js APIs are available in this process.
 
 let {clipboard, ipcRenderer} = require('electron')
+import notif from './lib/notifications'
+
 let player;
 
 // promise for loading Youtube Api
@@ -67,5 +69,5 @@ ipcRenderer.on('youtube', (ev, arg) => {
 }) 
 
 ipcRenderer.on('invalidUrl', () => {
-	alert('Oops! This isn\'t supported URL')
+	notif('Oops! This isn\'t supported URL')
 })
