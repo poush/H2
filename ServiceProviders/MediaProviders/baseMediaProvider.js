@@ -1,9 +1,3 @@
-/*
-* @Author: Piyush Agrawal
-* @Date:   2018-09-03 02:37:16
-* @Last Modified by:   Piyush Agrawal
-* @Last Modified time: 2018-09-06 03:59:58
-*/
 import {clipboard} from 'electron'
 
 export default class baseMediaProvider {

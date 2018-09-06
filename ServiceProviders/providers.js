@@ -1,5 +1,6 @@
 import {youtubeProvider} from './MediaProviders/youtube'
 import {pdfProvider} from './MediaProviders/pdf'
+import {docsProvider} from './MediaProviders/docs'
 import applyMedia from './mediaProviderApplier'
 import {clipboard} from 'electron'
 
@@ -7,7 +8,8 @@ import {clipboard} from 'electron'
 let matchers = {
 
 	'youtube' : new youtubeProvider(),
-	'pdf': new pdfProvider()
+	'pdf': new pdfProvider(),
+	'docs': new docsProvider()
 }
 
 module.exports = {

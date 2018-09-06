@@ -1,10 +1,3 @@
-/*
-* @Author: Piyush Agrawal
-* @Date:   2018-09-03 03:13:59
-* @Last Modified by:   Piyush Agrawal
-* @Last Modified time: 2018-09-06 04:07:40
-*/
-
 import baseMediaProvider from './MediaProviders/baseMediaProvider'
 
 export default function (toApply, win){

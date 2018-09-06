@@ -1,15 +1,16 @@
 import baseMediaProvider from './baseMediaProvider'
 
-export class pdfProvider extends baseMediaProvider {
+export class docsProvider extends baseMediaProvider {
 	
 	constructor(){
 		super()
-		this.name = 'pdf'
-		this.response.type = 'link'
+		this.name = 'googleDocs'
+		this.response.eventName = 'googleDocs'
+		this.response.type = 'iframe'
 	}
 
 	matcher(link){
-		const regex = /(https?:\/\/\S*?\.pdf)/gm;
+		const regex = /https:\/\/docs.google.com\/document\/d\/[0-9A-Za-z]+/gm;
 		var match = regex.exec(link)
 		if(match)
 			return match;

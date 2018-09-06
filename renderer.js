@@ -55,6 +55,13 @@ function play() {
   }
  }
 
+function defaultiFrame(arg){
+	alert('sds')
+	let web = `<iframe src="${arg}" frameborder="0" sandbox="allow-scripts allow-popups allow-forms allow-same-origin" allowfullscreen="" style="position: absolute; left: 0px; top: 0px; width: 100%; height: 100%; border-radius: 1px; pointer-events: auto; background-color: rgb(247, 246, 245);"></iframe>`
+	document.querySelector('#video').innerHTML = web
+
+}
+
 
 ipcRenderer.on('pause', (ev, arg) => {
 	pause()
@@ -67,6 +74,10 @@ ipcRenderer.on('play', (ev, arg) => {
 ipcRenderer.on('youtube', (ev, arg) => {
 	putYoutube(arg)
 }) 
+
+ipcRenderer.on('googleDocs', (ev, arg) => {
+	defaultiFrame(arg)
+})
 
 ipcRenderer.on('invalidUrl', () => {
 	notif('Oops! This isn\'t supported URL')
