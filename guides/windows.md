@@ -28,7 +28,7 @@ npm install
  - Change to the folder containing the cloned version (__h2-master__)
  - Install dependencies - this might take a few minutes
 ```
-npm install
+npm install --dev
 ```
 
 # Run h2
@@ -37,4 +37,13 @@ After the installation is complete stay in the h2 directory and type
 nmp start
 ```
 
+# Play a video
+ - Once the program has started you see the H2 window on top containing the text
+```
+Hello People!
+
+Start by pasting any youtube url. For bugs, you can create issues at github.com/poush/h2
+```
+ - Open a video on youtube using your browser, copy its URL 
+ - Paste the URL into the H2 window using `<Ctrl>+<Shift>+V` and the video automatically starts.
    
