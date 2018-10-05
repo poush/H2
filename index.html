@@ -1,21 +1,60 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8">
-    <title>H2</title>
-  </head>
-  <body>
-    
-    <div id="video" style="position: fixed; top:0; bottom:0; left:0; right:0; z-index:1000;">
-      <h1>Hello People!</h1>
-      <p> Start by pasting any youtube url. For bugs, you can create issues at github.com/poush/h2 </p>
+
+<head>
+  <meta charset="UTF-8">
+  <title>H2</title>
+  <link rel="stylesheet" href="assets/css/main.css">
+</head>
+
+<body>
+
+  <div id="video" style="position: fixed; top:0; bottom:0; left:0; right:0; z-index:1000;">
+    <div class="drop-it-hot" id="drop-area">
+      <div class="info heading">
+        <h1>Hello People!</h1>
+        <p> Start by pasting any youtube url. For bugs, you can create issues at github.com/poush/h2 </p>
+      </div>
+      <div class="circle">
+        <svg fill="currentColor" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M0 0h24v24H0z" fill="none" />
+          <path d="M9 16h6v-6h4l-7-7-7 7h4zm-4 2h14v2H5z" />
+        </svg>
+      </div>
+      <div class="info drag">
+        <p>Drag and drop file here!</p>
+      </div>
+      <form class="choose-files">
+        <input type="file" id="fileElem" accept="image/*" onchange="handleFiles(this.files)">
+      </form>
+      <div id="gallery"></div>
+    </div>
+
+    <div class="editor">
+      <div class="range-wrapper">
+        <label for="contrast">Contrast</label>
+        <input class="range" name="contrast" value="100" type="range" min="0" max="200" value="0" data-unit="%">
+      </div>
+      <div class="range-wrapper">
+        <label for="brightness">Brightness</label>
+        <input class="range" name="brightness" value="100" type="range" min="0" max="200" data-unit="%">
+      </div>
+      <div class="range-wrapper">
+        <label for="blur">Hue</label>
+        <input class="range" name="hue-rotate" value="0" type="range" min="0" max="200" data-unit="deg">
+      </div>
+      <div class="range-wrapper">
+        <label for="sepia">Sepia</label>
+        <input class="range" name="sepia" value="0" type="range" min="0" max="200" data-unit="%">
+      </div>
+    </div>
 
   </div>
-    <script>
-      // You can also require other files to run in this process
-      require('./renderer.js')
+  <script>
+    // You can also require other files to run in this process
+    require('./renderer.js')
+    require('./assets/js/controls.js')
+  </script>
+</body>
 
-      
-    </script>
-  </body>
 </html>
