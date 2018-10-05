@@ -1,14 +1,14 @@
-# Mac H2 Installation
+# Linux H2 Installation
 
 Follow the steps from below
 
-![Alt text](../img/install_mac.png)
+![Alt text](../img/install_linux.png)
 
 ### Shell script installation
 
 * For first time install clone the repo https://github.com/poush/h2.git
 * Run the shell script `cd h2/install`
-* `sh ./mac.sh`
+* `sh ./linux.sh`
 
 Once started we will be default window like below
 
@@ -23,6 +23,4 @@ Move the window to any place!
 
 
 ![Alt text](../img/step2.png)
-
-
 
