@@ -14,7 +14,6 @@ These instructions have been tested on Windows 10 1803 x64
 ```
 git clone https://github.com/poush/h2`
 ```
- - Go into the repository on your machine
  - Open Powershell 
  - Change to the folder containing the cloned version
  - Install dependencies - this might take a few minutes
