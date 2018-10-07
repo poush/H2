@@ -28,7 +28,7 @@ function createWindow () {
 
   mainWindow.setAlwaysOnTop(true, "floating");
   mainWindow.setVisibleOnAllWorkspaces(true);
-  mainWindow.setFullScreenable(false);
+  mainWindow.setFullScreenable(true);
 
   // and load the index.html of the app.
   mainWindow.loadFile('index.html')
@@ -56,6 +56,9 @@ function createWindow () {
   })
   globalShortcut.register('CommandOrControl+Shift+2', () => {
     mainWindow.webContents.send('play', 'ping')
+  })
+  globalShortcut.register('Alt+Shift+F', () => {
+    mainWindow.setFullScreen(!mainWindow.isFullScreen()) 
   })
 }
 
