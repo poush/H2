@@ -28,7 +28,7 @@ function createWindow () {
 
   mainWindow.setAlwaysOnTop(true, "floating");
   mainWindow.setVisibleOnAllWorkspaces(true);
-  mainWindow.setFullScreenable(true);
+  mainWindow.setFullScreenable(false);
 
   // and load the index.html of the app.
   mainWindow.loadFile('index.html')
@@ -46,6 +46,10 @@ function createWindow () {
     mainWindow = null
   })
 
+  mainWindow.on('leave-full-screen', function () {
+    mainWindow.setFullScreenable(false)
+    console.log('leave full screen event emitted')
+  })
 
   globalShortcut.register('CommandOrControl+Shift+V', () => {
     providers.run(mainWindow)
@@ -58,7 +62,12 @@ function createWindow () {
     mainWindow.webContents.send('play', 'ping')
   })
   globalShortcut.register('Alt+Shift+F', () => {
-    mainWindow.setFullScreen(!mainWindow.isFullScreen()) 
+    if(mainWindow.isFullScreen()) {
+      mainWindow.setFullScreen(false)
+    } else {
+      mainWindow.setFullScreenable(true) 
+      mainWindow.setFullScreen(true) 
+    }
   })
 }
 
