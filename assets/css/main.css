@@ -74,7 +74,7 @@ body {
 
 .choose-files {
   align-self: flex-end;
-  z-index: 50;
+  z-index: 10;
   display: none;
 }
 
@@ -147,29 +147,18 @@ body {
 }
 
 #gallery {
+  background: #fff;
   position: absolute;
   height: 90%;
   top: 0;
   left: 0;
-  z-index: 20;
-  width: 100%;
-}
-
-canvas {
-  min-width: 300px;
-  width: 100%;
-  height: auto;
-}
-
-.download a img {
-  max-width: 25px;
-  margin-top: 5px;
+  z-index: 100;
 }
 
 #gallery img {
-  display: none;
-  background-repeat: no-repeat;
-  background-size: cover;
+  width: 100%;
+  height: 90%;
+
   object-fit: cover;
   filter: contrast(var(--contrast)) brightness(var(--brightness))
     sepia(var(--sepia)) hue-rotate(var(--hue-rotate));

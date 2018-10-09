@@ -22,31 +22,14 @@ const unhighlight = () => {
 
 // Preview file
 const previewFile = file => {
-  document.getElementById("gallery").innerHTML = "<canvas></canvas>";
-  document.getElementById("heading").setAttribute("style", "opacity:0;");
-  document.getElementById("circle").setAttribute("style", "opacity:0;");
-  document.getElementById("drag").setAttribute("style", "opacity:0;");
   let reader = new FileReader();
   reader.readAsDataURL(file);
   reader.onloadend = function() {
     let img = document.createElement("img");
     img.src = reader.result;
-    img.setAttribute("id", "uploadedImage");
     document.getElementById("gallery").appendChild(img);
     editorElement.classList.add("is-visible");
-    img.onload = drawCanvas;
   };
-
-  function drawCanvas() {
-    // Create an out of view canvas
-    var canvas = document.querySelector("canvas"),
-      ctx = canvas.getContext("2d");
-    // Set canvas dimensions to original image
-    canvas.width = this.width;
-    canvas.height = this.height;
-    ctx.drawImage(this, 0, 0);
-    saveImage();
-  }
 };
 
 // Setup to handle multiple files
@@ -76,45 +59,8 @@ function handleUpdate() {
   );
 }
 
-// Save image
-function saveImage() {
-  var canvas = document.querySelector("canvas");
-
-  // Set download link to save image
-  var link = document.getElementById("downloadImage");
-  link.setAttribute("download", "h2-image.png");
-  link.setAttribute(
-    "href",
-    canvas.toDataURL("image/png").replace("image/png", "image/octet-stream")
-  );
-}
-
-document.getElementById("downloadImage").onclick = function() {
-  location.reload();
-};
-
 inputRange.forEach(input => input.addEventListener("change", handleUpdate));
 inputRange.forEach(input => input.addEventListener("mousemove", handleUpdate));
-
-inputRange.forEach(input => input.addEventListener("change", updateCanvas));
-function updateCanvas() {
-  // Create an out of view canvas
-  const img = document.getElementById("uploadedImage");
-  const canvas = document.querySelector("canvas"),
-    ctx = canvas.getContext("2d");
-  // Get filter values
-  let filterValues = document.documentElement.style.cssText;
-  // Replace values to canvas filter CSS
-  filterValues = filterValues
-    .replace(/--/g, "")
-    .replace(/:/g, "(")
-    .replace(/;/g, ")");
-  // Apply filters
-  ctx.filter = filterValues;
-  // Update canvas and save image href
-  ctx.drawImage(img, 0, 0);
-  saveImage();
-}
 
 dragEvents.forEach(eventName => {
   dropArea.addEventListener(eventName, preventDefaults, false);
