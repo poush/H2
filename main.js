@@ -1,6 +1,7 @@
 // Modules to control application life and create native browser window
 const {app, Menu, Tray, BrowserWindow, globalShortcut, session} = require('electron')
 const providers  = require('./ServiceProviders/providers')
+const fullscreenToggle = require('./lib/fullscreen-toggle')
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -46,11 +47,6 @@ function createWindow () {
     mainWindow = null
   })
 
-  mainWindow.on('leave-full-screen', function () {
-    mainWindow.setFullScreenable(false)
-    console.log('leave full screen event emitted')
-  })
-
   globalShortcut.register('CommandOrControl+Shift+V', () => {
     providers.run(mainWindow)
     // mainWindow.webContents.send('newlink', 'ping')
@@ -62,12 +58,10 @@ function createWindow () {
     mainWindow.webContents.send('play', 'ping')
   })
   globalShortcut.register('Alt+Shift+F', () => {
-    if(mainWindow.isFullScreen()) {
-      mainWindow.setFullScreen(false)
-    } else {
-      mainWindow.setFullScreenable(true) 
-      mainWindow.setFullScreen(true) 
-    }
+    fullscreenToggle(mainWindow, false)
+  })
+  globalShortcut.register('esc', () => {
+    fullscreenToggle(mainWindow, true)
   })
 }
 
