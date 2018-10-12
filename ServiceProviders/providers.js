@@ -1,8 +1,8 @@
-import {youtubeProvider} from './MediaProviders/youtube'
-import {pdfProvider} from './MediaProviders/pdf'
-import {docsProvider} from './MediaProviders/docs'
-import applyMedia from './mediaProviderApplier'
-import {clipboard} from 'electron'
+const youtubeProvider  = require('./MediaProviders/youtube')
+const pdfProvider  	   = require('./MediaProviders/pdf')
+const docsProvider     = require('./MediaProviders/docs')
+const applyMedia  	   = require('./mediaProviderApplier')
+const {clipboard} = require('electron')
 
 
 let matchers = {

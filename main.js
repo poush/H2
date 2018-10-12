@@ -71,7 +71,7 @@ function createWindow() {
 }
 
 let createMenuTray = () => {
-  tray = new Tray('icon.png')
+  tray = new Tray(__dirname + '/tray.png')
   const contextMenu = Menu.buildFromTemplate([
     { role: 'about' },
     { label: 'Quit', click() { app.quit() } }
