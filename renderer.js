@@ -3,7 +3,7 @@
 // All of the Node.js APIs are available in this process.
 
 let { clipboard, ipcRenderer } = require('electron')
-import notif from './lib/notifications'
+const notif = require('./lib/notifications')
 
 let player;
 
@@ -72,6 +72,7 @@ ipcRenderer.on('play', (ev, arg) => {
 })
 
 ipcRenderer.on('youtube', (ev, arg) => {
+  console.log('called')
   putYoutube(arg)
 })
 

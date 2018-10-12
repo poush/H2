@@ -1,6 +1,6 @@
-import baseMediaProvider from './baseMediaProvider'
+const baseMediaProvider = require('./baseMediaProvider')
 
-export class youtubeProvider extends baseMediaProvider {
+class youtubeProvider extends baseMediaProvider {
 	
 	constructor(){
 		super()
@@ -33,3 +33,5 @@ export class youtubeProvider extends baseMediaProvider {
 	}
 
 }
+
+module.exports = youtubeProvider
