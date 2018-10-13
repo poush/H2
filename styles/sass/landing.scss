@@ -1,0 +1,222 @@
+@import url('https://fonts.googleapis.com/css?family=Krub:300,400,500,600,700|Roboto:300,400,500,700,900');
+
+$orange: #ff3c32;
+$orange-hover: #eb1e14;
+$orange-hover-shadow: #ab140d;
+$purple: #4032a5;
+$purple-hover: #25149b;
+$purple-hover-shadow: #3c2eb7;
+$cream: #ffe458;
+$bg-white: #ffffff;
+$bg-main: #fafafa;
+$bg-darker: #f2f5f8;
+$heading-blue: #001026;
+$platform-btn: #234293;
+
+
+body {
+	scroll-behavior: smooth;
+	width: 100vw;
+	overflow-x: hidden;
+  font-family: 'Roboto', sans-serif;
+  color: #616161;
+}
+
+// main section
+.full-section {
+  height: 92vh;
+  padding: 17vh 50px;
+  display: flex;
+  background: $bg-white;
+
+  @media screen and (max-width: 768px) {
+    height: 60vh;
+  }
+
+  @media screen and (max-width: 509px) {
+    height: 70vh;
+  }
+
+  @media screen and (max-width: 325px) {
+    height: 75vh;
+  }
+
+  .screenshot {
+    max-width: 100%;
+
+    @media screen and (max-width:769px) {
+      display: none;
+    }
+  }
+}
+
+.half-section {
+  height: 75vh;
+  padding: 70px 50px;
+  display: block;
+  background: $bg-main;
+}
+
+// installation guide
+.install-section {
+  height: 65vh;
+
+  @media screen and (max-width: 768px) {
+    height: 45vh;
+  }
+
+  @media screen and (max-width: 510px) {
+    height: 65vh;
+  }
+
+  @media screen and (max-width: 400px) {
+    height: 75vh;
+  }
+}
+
+// features
+.feature-section {
+  height: 90vh;
+  background: $bg-darker;
+
+  @media screen and (max-width: 767px) {
+    height: 140vh;
+  }
+
+  @media screen and (max-width: 500px) {
+    height: 160vh;
+  }
+
+  @media screen and (max-width:376px) {
+    height: 180vh;
+  }
+}
+
+// all headings on the page
+.heading {
+  text-transform: uppercase;
+  word-spacing: 2px;
+  letter-spacing: 1px;
+  font-weight: 800;
+  color: $heading-blue;
+  word-wrap: break-word;
+}
+
+.p-spacing {
+  margin: 20px 0px 60px 0px;
+}
+
+// styling for all buttons on the page
+.btn-container {
+  margin-top: 80px;
+
+  .btn {
+    border-radius: 50px !important;
+    margin: 15px;
+
+    @media screen and (max-width:491px) {
+      margin: 8px auto;
+    }
+  }
+
+  .btn-primary {
+    background: $orange !important;
+    border-color: $orange;
+
+    &:hover {
+      background: $orange-hover !important;
+      border-color: $orange-hover !important;
+      box-shadow: 0 2px 8px #ccc;
+    }
+  }
+
+  .btn-secondary {
+    background: $purple !important;
+    border-color: $purple !important;
+
+    &:hover {
+      background: $purple-hover !important;
+      border-color: $purple-hover !important;
+      box-shadow: 0 2px 8px #ccc;
+    }
+  }
+
+  .btn-platform {
+    background: $platform-btn !important;
+    border-color: $platform-btn !important;
+    color: $bg-main;
+
+    &:hover {
+      box-shadow: 0 2px 2px #7ea3ff;
+    }
+  }
+
+  .btn-large {
+    border-radius: 50px !important;
+  }
+
+  @media screen and (max-width:491px) {
+    margin-top: 20px !important;
+  }
+}
+
+// styling for cards
+.cards-container {
+  justify-content: center;
+  margin-top: 10px;
+
+  .card {
+    margin: 0px 10px;
+    border-bottom: 4px solid;
+    border-radius: 0.5rem;
+    font-family: 'Krub', sans-serif;
+    box-shadow: 0 .46875rem 2.1875rem rgba(90,97,105,.1),0 .9375rem 1.40625rem rgba(90,97,105,.1),0 .25rem .53125rem rgba(90,97,105,.12),0 .125rem .1875rem rgba(90,97,105,.1);
+
+    &:hover {
+      box-shadow: 0 .47rem 2.2rem 1rem rgba(90,97,105,.1),0 .94rem 1.407rem .7rem rgba(90,97,105,.1),0 .5rem .532rem .25rem rgba(90,97,105,.12),0 .195rem .12rem .05rem rgba(90,97,105,.1);
+    }
+
+    @media screen and (max-width: 767px) {
+      margin-bottom: 20px;
+    }
+
+    .card-icon {
+      font-size: 70px;
+    }
+  }
+
+  .feature-youtube {
+    border-bottom: 4px solid $orange;
+  }
+
+  .icon-youtube {
+    color: $orange;
+  }
+
+  .feature-docs {
+    border-bottom: 4px solid $purple;
+  }
+
+  .icon-docs {
+    color: $purple;
+  }
+
+  .feature-editor {
+    border-bottom: 4px solid $cream;
+  }
+
+  .icon-editor {
+    color: $cream;
+  }
+
+  .card-title {
+    color: #343434;
+    font-weight: 700;
+    word-spacing: 2px;
+    letter-spacing: 1px;
+  }
+
+  .card-text {
+    color: #404040 ;
+  }
+}
