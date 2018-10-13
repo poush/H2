@@ -68,6 +68,12 @@ function createWindow() {
   globalShortcut.register('CommandOrControl+Shift+2', () => {
     mainWindow.webContents.send('play', 'ping')
   })
+
+  // Useful in a scenario where the window becomes irresponsive
+  // and the native "quit" shortcut doesn't work
+  globalShortcut.register('CommandOrControl+H+Q', () => {
+    app.quit();
+  })
 }
 
 let createMenuTray = () => {
