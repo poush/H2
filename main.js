@@ -68,6 +68,9 @@ function createWindow() {
   globalShortcut.register('CommandOrControl+Shift+2', () => {
     mainWindow.webContents.send('play', 'ping')
   })
+  globalShortcut.register('CommandOrControl+H+Q', () => {
+    app.quit()
+  })
 }
 
 let createMenuTray = () => {
