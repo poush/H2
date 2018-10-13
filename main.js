@@ -72,7 +72,7 @@ function createWindow() {
   // Useful in a scenario where the window becomes irresponsive
   // and the native "quit" shortcut doesn't work
   globalShortcut.register('CommandOrControl+H+Q', () => {
-    app.quit();
+    app.quit()
   })
 }
 
