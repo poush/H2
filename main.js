@@ -1,11 +1,24 @@
 // Modules to control application life and create native browser window
 const { app, Menu, Tray, BrowserWindow, globalShortcut, session } = require('electron')
 const providers = require('./ServiceProviders/providers')
+const Store = require('./storage/storage');
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow
 let tray
+
+// create a store to save user preferences
+let store = new Store({
+  configName: 'user-preferences',
+  defaults: {
+    alwaysWindowOnTop: true
+  }
+});
+
+function setWindowPosition(alwaysOnTop = true) {
+  mainWindow.setAlwaysOnTop(alwaysOnTop, "floating");
+}
 
 function createWindow() {
 
@@ -26,7 +39,8 @@ function createWindow() {
   if (process.platform == 'darwin')
     app.dock.hide()
 
-  mainWindow.setAlwaysOnTop(true, "floating");
+  setWindowPosition(store.get('alwaysWindowOnTop'));
+  
   mainWindow.setVisibleOnAllWorkspaces(true);
   mainWindow.setFullScreenable(false);
 
@@ -62,6 +76,12 @@ function createWindow() {
     providers.run(mainWindow)
     // mainWindow.webContents.send('newlink', 'ping')
   })
+  
+  globalShortcut.register('Alt+Shift+T', () => {
+    // brings the window to top always
+    setWindowPosition();
+  })
+
   globalShortcut.register('CommandOrControl+Shift+1', () => {
     mainWindow.webContents.send('pause', 'ping')
   })
@@ -78,12 +98,26 @@ function createWindow() {
 
 let createMenuTray = () => {
   tray = new Tray(__dirname + '/tray.png')
-  const contextMenu = Menu.buildFromTemplate([
+
+  const trayMenus = [
     { role: 'about' },
-    { label: 'Quit', click() { app.quit() } }
-  ])
+    { label: 'Quit', click() { app.quit() } },
+    { label: 'Set window always to top',
+      type: 'checkbox',
+      checked: store.get('alwaysWindowOnTop'),
+      click(menuItem) {
+        menuItem.checked = !store.get('alwaysWindowOnTop');
+        setWindowPosition(menuItem.checked);
+        store.set('alwaysWindowOnTop', menuItem.checked);
+      }
+    }
+  ];
+  
+  const contextMenu = Menu.buildFromTemplate(trayMenus);
+
   tray.setToolTip('H2')
   tray.setContextMenu(contextMenu)
+  tray.setTitle('H2');
   tray.on('click', function (event) {
     console.log('called')
     !mainWindow.isFocused() ? mainWindow.focus() : true;
