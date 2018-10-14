@@ -8,7 +8,7 @@ const cssmin = require('gulp-cssmin');
 
 gulp.task('default', () => {
     gutil.log('Gulp is running!');
-    gulp.watch('styles/sass/landing.scss', gulp.series('sass-to-css', 'minify-css'));
+    gulp.watch('styles/sass/index.scss', gulp.series('sass-to-css', 'minify-css'));
 });
 
 gulp.task('sass-to-css', () => {
@@ -18,7 +18,7 @@ gulp.task('sass-to-css', () => {
 });
 
 gulp.task('minify-css', () => {
-    return gulp.src('./styles/css/landing.css')
+    return gulp.src('./styles/css/index.css')
         .pipe(cssmin().on('error', function (err) {
             gutil.log(gutil.colors.red('[Error]'), err.toString());
         }))
