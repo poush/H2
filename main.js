@@ -1,16 +1,11 @@
 // Modules to control application life and create native browser window
 const { app, Menu, Tray, BrowserWindow, globalShortcut, session } = require('electron')
 const providers = require('./ServiceProviders/providers')
-
+const utils = require('./lib/util');
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow
 let tray
-
-function setWindowPosition(alwaysOnTop = true) {
-  let windowLayer = alwaysOnTop ? 1 : 0;
-  mainWindow.setAlwaysOnTop(alwaysOnTop, "floating", windowLayer);
-}
 
 function createWindow() {
 
@@ -31,8 +26,6 @@ function createWindow() {
   // Set always on top
   if (process.platform == 'darwin')
     app.dock.hide()
-
-  setWindowPosition();
   
   mainWindow.setVisibleOnAllWorkspaces(true);
   mainWindow.setFullScreenable(false);
@@ -71,7 +64,7 @@ function createWindow() {
   
   globalShortcut.register('Alt+Shift+T', () => {
     // brings the window to top always
-    setWindowPosition();
+    utils.resetWindowToFloat(mainWindow);
   })
 
   globalShortcut.register('CommandOrControl+Shift+1', () => {
@@ -94,12 +87,9 @@ let createMenuTray = () => {
   const trayMenus = [
     { role: 'about' },
     { label: 'Quit', click() { app.quit() } },
-    { label: 'Set window always to top',
-      type: 'checkbox',
-      checked: true, // by default window is on top always
-      click(menuItem) {
-        menuItem.checked = !mainWindow.isAlwaysOnTop();
-        setWindowPosition(menuItem.checked);
+    { label: 'Bring H2 to the front',
+      click() {
+        utils.resetWindowToFloat(mainWindow);
       }
     }
   ];
@@ -122,6 +112,7 @@ let createMenuTray = () => {
 app.on('ready', () => {
   session.defaultSession.clearStorageData()
   createWindow()
+  utils.resetWindowToFloat(mainWindow);
   createMenuTray()
 })
 
