@@ -8,7 +8,7 @@ let mainWindow
 let tray
 
 function setWindowPosition(alwaysOnTop = true) {
-  mainWindow.setAlwaysOnTop(alwaysOnTop, "floating");
+  mainWindow.setAlwaysOnTop(alwaysOnTop, "floating", 1);
 }
 
 function createWindow() {
@@ -17,6 +17,7 @@ function createWindow() {
   let config = {
     width: 400,
     height: 300,
+    frame: false,
     webPreferences: {
       plugins: true
     }
@@ -65,7 +66,6 @@ function createWindow() {
 
   globalShortcut.register('CommandOrControl+Shift+V', () => {
     providers.run(mainWindow)
-    // mainWindow.webContents.send('newlink', 'ping')
   })
   
   globalShortcut.register('Alt+Shift+T', () => {
