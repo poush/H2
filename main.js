@@ -13,6 +13,7 @@ function createWindow() {
   let config = {
     width: 400,
     height: 300,
+    frame: false,
     webPreferences: {
       plugins: true
     }
@@ -26,7 +27,7 @@ function createWindow() {
   if (process.platform == 'darwin')
     app.dock.hide()
 
-  mainWindow.setAlwaysOnTop(true, "floating");
+  mainWindow.setAlwaysOnTop(true, "floating", 1);
   mainWindow.setVisibleOnAllWorkspaces(true);
   mainWindow.setFullScreenable(false);
 
@@ -60,7 +61,6 @@ function createWindow() {
 
   globalShortcut.register('CommandOrControl+Shift+V', () => {
     providers.run(mainWindow)
-    // mainWindow.webContents.send('newlink', 'ping')
   })
   globalShortcut.register('CommandOrControl+Shift+1', () => {
     mainWindow.webContents.send('pause', 'ping')
