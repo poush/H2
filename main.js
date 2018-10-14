@@ -8,7 +8,8 @@ let mainWindow
 let tray
 
 function setWindowPosition(alwaysOnTop = true) {
-  mainWindow.setAlwaysOnTop(alwaysOnTop, "floating", 1);
+  let windowLayer = alwaysOnTop ? 1 : 0;
+  mainWindow.setAlwaysOnTop(alwaysOnTop, "floating", windowLayer);
 }
 
 function createWindow() {
