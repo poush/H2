@@ -27,9 +27,12 @@ class baseMediaProvider {
 	}
 
 	//method
-	extractContents(link=null) {
-		// to be implemented by inheriting objects
-		return true
+	extractContents(link) {
+		if (link != undefined || link != '') {  
+			this.response.content = link
+	  	}
+
+	  	return true
 	}
 
 	postWinLoad(win){

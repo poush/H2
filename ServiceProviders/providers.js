@@ -1,6 +1,7 @@
 const youtubeProvider  = require('./MediaProviders/youtube')
 const pdfProvider  	   = require('./MediaProviders/pdf')
 const docsProvider     = require('./MediaProviders/docs')
+const baseMediaProvider= require('./MediaProviders/baseMediaProvider')
 const applyMedia  	   = require('./mediaProviderApplier')
 const {clipboard} = require('electron')
 
@@ -9,14 +10,21 @@ let matchers = {
 
 	'youtube' : new youtubeProvider(),
 	'pdf': new pdfProvider(),
-	'docs': new docsProvider()
+	'docs': new docsProvider(),
+	'provider': new baseMediaProvider()
+	
 }
 
 module.exports = {
 
 	run(win) {
 
-		let text = clipboard.readText('selection')
+		if(arguments[1]) {
+			clipboard.writeText(arguments[1])
+		}
+
+		let text = clipboard.readText('selection');
+
 		let provider = null
 		for(let key in matchers){
 			if(matchers[key].matcher(text) !== false){
