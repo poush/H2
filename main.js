@@ -9,7 +9,7 @@ let tray
 
 function createWindow() {
 
-  // cfeate config
+  // create config
   let config = {
     width: 400,
     height: 300,
@@ -51,11 +51,9 @@ function createWindow() {
   // Disable new browser windows and popups
   mainWindow.webContents.on("new-window", function (e, url) {
     e.preventDefault();
-    mainWindow.webContents.send(
-      "alertUser",
-      "This is an external link.\nAre you sure you want to continue?",
-      url
-    );
+    
+    providers.run(mainWindow, url)
+    
     mainWindow.focus();
   });
 
