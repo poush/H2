@@ -4,25 +4,15 @@
   "description": "A mini browser to embed on top of screens",
   "main": "main.js",
   "scripts": {
-    "start": "electron .",
-    "build": "electron-builder --win --linux --mac"
-  },
-  "build": {
-    "appId": "com.ipiush.h2"
+    "start": "gulp"
   },
   "repository": "https://github.com/poush/h2",
   "keywords": [
-    "Electron",
-    "quick",
-    "start",
-    "tutorial",
-    "demo"
+    "landing-page"
   ],
-  "author": "GitHub",
+  "author": "https://mahamshahid18.github.io",
   "license": "CC0-1.0",
   "devDependencies": {
-    "electron": "^2.0.0",
-    "electron-builder": "^20.28.4",
     "gulp": "^4.0.0",
     "gulp-cssmin": "^0.2.0",
     "gulp-rename": "^1.4.0",
