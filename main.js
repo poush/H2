@@ -1,20 +1,11 @@
 // Modules to control application life and create native browser window
 const { app, Menu, Tray, BrowserWindow, globalShortcut, session } = require('electron')
 const providers = require('./ServiceProviders/providers')
-const Store = require('./storage/storage');
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow
 let tray
-
-// create a store to save user preferences
-let store = new Store({
-  configName: 'user-preferences',
-  defaults: {
-    alwaysWindowOnTop: true
-  }
-});
 
 function setWindowPosition(alwaysOnTop = true) {
   mainWindow.setAlwaysOnTop(alwaysOnTop, "floating");
@@ -39,7 +30,7 @@ function createWindow() {
   if (process.platform == 'darwin')
     app.dock.hide()
 
-  setWindowPosition(store.get('alwaysWindowOnTop'));
+  setWindowPosition();
   
   mainWindow.setVisibleOnAllWorkspaces(true);
   mainWindow.setFullScreenable(false);
@@ -104,11 +95,10 @@ let createMenuTray = () => {
     { label: 'Quit', click() { app.quit() } },
     { label: 'Set window always to top',
       type: 'checkbox',
-      checked: store.get('alwaysWindowOnTop'),
+      checked: true, // by default window is on top always
       click(menuItem) {
-        menuItem.checked = !store.get('alwaysWindowOnTop');
+        menuItem.checked = !mainWindow.isAlwaysOnTop();
         setWindowPosition(menuItem.checked);
-        store.set('alwaysWindowOnTop', menuItem.checked);
       }
     }
   ];
