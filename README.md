@@ -13,6 +13,7 @@ Inspired by the Helium app, **H2** is a minimalist browser to watch embeded vide
 * [Linux](docs/linux.md)
 ## Usage
 * Copy any youtube, PDF or google docs URL and press `Ctrl/Command + Shift + V`
+* [Keyboards Shortcuts](docs/shortcuts.md)
 ## Contributing
 ```bash
 # Clone this repository
