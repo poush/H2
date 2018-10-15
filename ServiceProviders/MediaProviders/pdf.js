@@ -1,6 +1,6 @@
-import baseMediaProvider from './baseMediaProvider'
+const baseMediaProvider = require('./baseMediaProvider')
 
-export class pdfProvider extends baseMediaProvider {
+class pdfProvider extends baseMediaProvider {
 	
 	constructor(){
 		super()
@@ -32,3 +32,5 @@ export class pdfProvider extends baseMediaProvider {
 	}
 
 }
+
+module.exports = pdfProvider

@@ -1,17 +1,21 @@
 # H2
-Inspired from Helium app. 
-Currently works for youtube, pdf files and google docs, Copy any youtube, PDF url or google docs and press Ctrl/Command + Shift + V
-[WIP] many features coming soon. Works for all platforms, thanks to electron ❤️
+Inspired by the Helium app, **H2** is a minimalist browser to watch embeded videos and more in  picture-in-picture mode.
+# Features
+:tv: Works with any Youtube URL.
 
-![sample](img.png)
+:scroll: Works with PDFs links, Google Docs URLs.
+
+:computer: Works on all platforms, thanks to electron ❤️
+
+:clock9:[WIP] After [#22](https://github.com/poush/H2/pull/22) a basic image editor, many other features coming soon.
+# Example
+![demo](img/demo.gif)
 ## Installation
-* [Windows](guides/windows.md)
-* [Mac](guides/mac.md)
-* [Linux](guides/linux.md)
+* [Windows](docs/windows.md)
+* [Mac](docs/mac.md)
+* [Linux](docs/linux.md)
 ## Usage
-1. Can run youtube
-2. Can run pdf and google docs file
-3. After [#22](https://github.com/poush/H2/pull/22) it will have a basic image editor, so we can include this as well.
+* Copy any youtube, PDF or google docs URL and press `Ctrl/Command + Shift + V`
 ## Contributing
 ```bash
 # Clone this repository

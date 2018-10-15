@@ -1,18 +1,19 @@
 // Modules to control application life and create native browser window
-const {app, Menu, Tray, BrowserWindow, globalShortcut, session} = require('electron')
-const providers  = require('./ServiceProviders/providers')
-
+const { app, Menu, Tray, BrowserWindow, globalShortcut, session } = require('electron')
+const providers = require('./ServiceProviders/providers')
+const utils = require('./lib/util');
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow
 let tray
 
-function createWindow () {
+function createWindow() {
 
   // cfeate config
   let config = {
     width: 400,
     height: 300,
+    frame: false,
     webPreferences: {
       plugins: true
     }
@@ -23,10 +24,9 @@ function createWindow () {
   mainWindow.setMenu(null)
 
   // Set always on top
-  if(process.platform == 'darwin')
+  if (process.platform == 'darwin')
     app.dock.hide()
-
-  mainWindow.setAlwaysOnTop(true, "floating");
+  
   mainWindow.setVisibleOnAllWorkspaces(true);
   mainWindow.setFullScreenable(false);
 
@@ -35,7 +35,7 @@ function createWindow () {
   // mainWindow.loadURL('https://www.netflix.com')
 
   // Open the DevTools.
-  if(process.env.DEV)
+  if (process.env.DEV)
     mainWindow.webContents.openDevTools()
 
   // Emitted when the window is closed.
@@ -47,37 +47,68 @@ function createWindow () {
   })
 
 
+  // Disable new browser windows and popups
+  mainWindow.webContents.on("new-window", function (e, url) {
+    e.preventDefault();
+    mainWindow.webContents.send(
+      "alertUser",
+      "This is an external link.\nAre you sure you want to continue?",
+      url
+    );
+    mainWindow.focus();
+  });
+
   globalShortcut.register('CommandOrControl+Shift+V', () => {
     providers.run(mainWindow)
-    // mainWindow.webContents.send('newlink', 'ping')
   })
   globalShortcut.register('CommandOrControl+Shift+T', () => {
+    // toggles translucent mode
     var translucency = 0;
-    
     mainWindow.getOpacity() == 1 ? translucency = 0.7 : translucency = 1;
     mainWindow.setOpacity(translucency);
-
   })
+  
+  globalShortcut.register('Alt+Shift+T', () => {
+    // brings the window to top always
+    utils.resetWindowToFloat(mainWindow);
+  })
+
   globalShortcut.register('CommandOrControl+Shift+1', () => {
     mainWindow.webContents.send('pause', 'ping')
   })
   globalShortcut.register('CommandOrControl+Shift+2', () => {
     mainWindow.webContents.send('play', 'ping')
   })
+
+  // Useful in a scenario where the window becomes irresponsive
+  // and the native "quit" shortcut doesn't work
+  globalShortcut.register('CommandOrControl+H+Q', () => {
+    app.quit()
+  })
 }
 
 let createMenuTray = () => {
-    tray = new Tray('icon.png')
-    const contextMenu = Menu.buildFromTemplate([
-        {role: 'about'},
-        {label: 'Quit', click() {app.quit()} }
-    ])
-    tray.setToolTip('H2')
-    tray.setContextMenu(contextMenu)
-    tray.on('click', function (event) {
-        console.log('called')
-        !mainWindow.isFocused() ? mainWindow.focus(): true;
-    })
+  tray = new Tray(__dirname + '/tray.png')
+
+  const trayMenus = [
+    { role: 'about' },
+    { label: 'Quit', click() { app.quit() } },
+    { label: 'Bring H2 to the front',
+      click() {
+        utils.resetWindowToFloat(mainWindow);
+      }
+    }
+  ];
+  
+  const contextMenu = Menu.buildFromTemplate(trayMenus);
+
+  tray.setToolTip('H2')
+  tray.setContextMenu(contextMenu)
+  tray.setTitle('H2');
+  tray.on('click', function (event) {
+    console.log('called')
+    !mainWindow.isFocused() ? mainWindow.focus() : true;
+  })
 
 }
 
@@ -85,9 +116,10 @@ let createMenuTray = () => {
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.on('ready', () => {
-    session.defaultSession.clearStorageData()
-    createWindow()
-    createMenuTray()
+  session.defaultSession.clearStorageData()
+  createWindow()
+  utils.resetWindowToFloat(mainWindow);
+  createMenuTray()
 })
 
 app.on('will-quit', () => {
@@ -107,7 +139,7 @@ app.on('window-all-closed', function () {
 // Unregister all shortcuts.
 app.on('will-quit', () => {
   globalShortcut.unregisterAll()
-  
+
 })
 
 app.on('activate', function () {

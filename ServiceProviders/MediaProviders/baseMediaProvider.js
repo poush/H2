@@ -1,6 +1,6 @@
-import {clipboard} from 'electron'
+const {clipboard} = require('electron')
 
-export default class baseMediaProvider {
+class baseMediaProvider {
 
 	constructor() {
 		this.version = '0.1'
@@ -42,3 +42,5 @@ export default class baseMediaProvider {
 	}
 
 }
+
+module.exports = baseMediaProvider
