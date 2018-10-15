@@ -1,7 +1,7 @@
 const { app, Menu, Tray, BrowserWindow, globalShortcut, session } = require('electron')
 const providers = require('./ServiceProviders/providers')
 const fullscreenToggle = require('./lib/fullscreen-toggle')
-
+const utils = require('./lib/util');
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow
@@ -13,6 +13,7 @@ function createWindow() {
   let config = {
     width: 400,
     height: 300,
+    frame: false,
     webPreferences: {
       plugins: true
     }
@@ -25,8 +26,7 @@ function createWindow() {
   // Set always on top
   if (process.platform == 'darwin')
     app.dock.hide()
-
-  mainWindow.setAlwaysOnTop(true, "floating");
+  
   mainWindow.setVisibleOnAllWorkspaces(true);
   mainWindow.setFullScreenable(false);
 
@@ -59,8 +59,13 @@ function createWindow() {
   
   globalShortcut.register('CommandOrControl+Shift+V', () => {
     providers.run(mainWindow)
-    // mainWindow.webContents.send('newlink', 'ping')
   })
+  
+  globalShortcut.register('Alt+Shift+T', () => {
+    // brings the window to top always
+    utils.resetWindowToFloat(mainWindow);
+  })
+
   globalShortcut.register('CommandOrControl+Shift+1', () => {
     mainWindow.webContents.send('pause', 'ping')
   })
@@ -80,17 +85,28 @@ function createWindow() {
 
 let createMenuTray = () => {
   tray = new Tray(__dirname + '/tray.png')
-  const contextMenu = Menu.buildFromTemplate([
+
+  const trayMenus = [
     { role: 'about' },
-    { 
-      label: 'Exit Fullscreen', 
+    { label: 'Exit Fullscreen', 
       accelerator: 'esc', 
-      click() { fullscreenToggle(mainWindow, true) }
+      click() { 
+        fullscreenToggle(mainWindow, true) 
+      }
     },
-    { label: 'Quit', click() { app.quit() } }
-  ])
+    { label: 'Quit', click() { app.quit() } },
+    { label: 'Bring H2 to the front',
+      click() {
+        utils.resetWindowToFloat(mainWindow);
+      }
+    }
+  ];
+  
+  const contextMenu = Menu.buildFromTemplate(trayMenus);
+
   tray.setToolTip('H2')
   tray.setContextMenu(contextMenu)
+  tray.setTitle('H2');
   tray.on('click', function (event) {
     console.log('called')
     !mainWindow.isFocused() ? mainWindow.focus() : true;
@@ -104,6 +120,7 @@ let createMenuTray = () => {
 app.on('ready', () => {
   session.defaultSession.clearStorageData()
   createWindow()
+  utils.resetWindowToFloat(mainWindow);
   createMenuTray()
 })
 
