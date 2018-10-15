@@ -70,9 +70,7 @@ function createWindow() {
   globalShortcut.register('Alt+Shift+F', () => {
     fullscreenToggle(mainWindow, false)
   })
-  globalShortcut.register('esc', () => {
-    fullscreenToggle(mainWindow, true)
-      
+
   // Useful in a scenario where the window becomes irresponsive
   // and the native "quit" shortcut doesn't work
   globalShortcut.register('CommandOrControl+H+Q', () => {
@@ -84,6 +82,11 @@ let createMenuTray = () => {
   tray = new Tray(__dirname + '/tray.png')
   const contextMenu = Menu.buildFromTemplate([
     { role: 'about' },
+    { 
+      label: 'Exit Fullscreen', 
+      accelerator: 'esc', 
+      click() { fullscreenToggle(mainWindow, true) }
+    },
     { label: 'Quit', click() { app.quit() } }
   ])
   tray.setToolTip('H2')
