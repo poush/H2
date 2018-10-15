@@ -51,6 +51,13 @@ function createWindow () {
     providers.run(mainWindow)
     // mainWindow.webContents.send('newlink', 'ping')
   })
+  globalShortcut.register('CommandOrControl+Shift+T', () => {
+    var translucency = 0;
+    
+    mainWindow.getOpacity() == 1 ? translucency = 0.7 : translucency = 1;
+    mainWindow.setOpacity(translucency);
+
+  })
   globalShortcut.register('CommandOrControl+Shift+1', () => {
     mainWindow.webContents.send('pause', 'ping')
   })
