@@ -1,5 +1,3 @@
-const {clipboard} = require('electron')
-
 class baseMediaProvider {
 
 	constructor() {
