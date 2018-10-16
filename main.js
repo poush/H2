@@ -61,6 +61,12 @@ function createWindow() {
   globalShortcut.register('CommandOrControl+Shift+V', () => {
     providers.run(mainWindow)
   })
+  globalShortcut.register('CommandOrControl+Shift+T', () => {
+    // toggles translucent mode
+    var translucency = 0;
+    mainWindow.getOpacity() == 1 ? translucency = 0.7 : translucency = 1;
+    mainWindow.setOpacity(translucency);
+  })
   
   globalShortcut.register('Alt+Shift+T', () => {
     // brings the window to top always
