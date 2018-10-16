@@ -19,7 +19,6 @@ class docsProvider extends baseMediaProvider {
 	}
 
 	extractContents(link) {
-		
 		if (link != undefined || link != '') {  
 			this.response.content = link
 	  	}
@@ -32,4 +31,6 @@ class docsProvider extends baseMediaProvider {
 		return true
 	}
 
-}module.exports = docsProvider
+}
+
+module.exports = docsProvider

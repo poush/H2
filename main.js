@@ -51,9 +51,7 @@ function createWindow() {
   // Disable new browser windows and popups
   mainWindow.webContents.on("new-window", function (e, url) {
     e.preventDefault();
-    
     providers.run(mainWindow, url)
-    
     mainWindow.focus();
   });
 

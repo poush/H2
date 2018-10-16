@@ -12,9 +12,12 @@ class baseMediaProvider {
 		}
 	}
 
-	get getContent() {
-		let link = clipboard.readText('selection')
-		if(this.extractContents(link)){
+	set content(link) {
+		this.extractContents(link)
+	}
+
+	get content() {
+		if(this.response.content != '' || this.response.link != undefined){
 			// console.log(this.response)
 			return this
 		}
