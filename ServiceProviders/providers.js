@@ -17,10 +17,6 @@ module.exports = {
 
 	run(win) {
 
-		if(arguments[1]) {
-			clipboard.writeText(arguments[1])
-		}
-
 		let text = clipboard.readText('selection');
 
 		let provider = null
@@ -35,7 +31,13 @@ module.exports = {
 			win.webContents.send('invalidUrl', 'ping')
 			return
 		}
+		
+		matchers[provider].content = text;
 
-		applyMedia(matchers[provider].getContent, win)
+		if(arguments[1]) {
+			matchers[provider].content = arguments[1];
+		}
+		
+		applyMedia(matchers[provider].content, win)
 	}
 }
