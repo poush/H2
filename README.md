@@ -2,8 +2,11 @@
 Inspired by the Helium app, **H2** is a minimalist browser to watch embeded videos and more in  picture-in-picture mode.
 # Features
 :tv: Works with any Youtube URL.
+
 :scroll: Works with PDFs links, Google Docs URLs.
+
 :computer: Works on all platforms, thanks to electron ❤️
+
 :clock9:[WIP] After [#22](https://github.com/poush/H2/pull/22) a basic image editor, many other features coming soon.
 # Example
 ![demo](img/demo.gif)
