@@ -8,10 +8,8 @@ const fs = require('fs');
  class Store {
   constructor(opts = {}) {
     let defaultConfig = {
-      configName: opts.configName || 'user',
-      defaults: {
-        alwaysWindowOnTop: true
-      }
+      configName: opts.configName || 'user-preference',
+      defaults: {}
     }
      opts.defaults = Object.assign(defaultConfig.defaults, opts.defaultConfig);
      const userDataPath = (electron.app || electron.remote.app).getPath('userData');
