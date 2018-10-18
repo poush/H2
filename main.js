@@ -16,7 +16,8 @@ function createWindow() {
     frame: false,
     webPreferences: {
       plugins: true
-    }
+    },
+    titleBarStyle: 'customButtonsOnHover',
   }
 
   // Create the browser window.
