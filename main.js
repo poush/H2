@@ -64,9 +64,12 @@ function createWindow() {
   })
   globalShortcut.register('CommandOrControl+Shift+T', () => {
     // toggles translucent mode
-    var translucency = 0;
-    mainWindow.getOpacity() == 1 ? translucency = 0.7 : translucency = 1;
+    var translucency = 1;
+    if(mainWindow.getOpacity() == 1){
+      translucency = 0.7
+    }
     mainWindow.setOpacity(translucency);
+    mainWindow.setIgnoreMouseEvents(translucency<1);
   })
   
   globalShortcut.register('Alt+Shift+T', () => {
