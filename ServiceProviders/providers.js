@@ -32,10 +32,10 @@ module.exports = {
 			return
 		}
 		
-		matchers[provider].content = text;
+		matchers[provider].text = text;
 
 		if(arguments[1]) {
-			matchers[provider].content = arguments[1];
+			matchers[provider].text = arguments[1];
 		}
 		
 		applyMedia(matchers[provider].content, win)

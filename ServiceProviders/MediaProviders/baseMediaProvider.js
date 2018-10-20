@@ -10,7 +10,7 @@ class baseMediaProvider {
 		}
 	}
 
-	set content(link) {
+	set text(link) {
 		this.extractContents(link)
 	}
 
