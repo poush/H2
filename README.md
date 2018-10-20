@@ -29,7 +29,7 @@ npm install
 npm start
 ```
 ## Bug
-Sometimes app doesn't run over the top of mac screens
+[Known Bugs](https://github.com/poush/H2/issues?q=is%3Aopen+is%3Aissue+label%3Abug)
 ## Credits
 
 ## License
