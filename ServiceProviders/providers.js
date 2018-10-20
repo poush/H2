@@ -9,14 +9,16 @@ let matchers = {
 
 	'youtube' : new youtubeProvider(),
 	'pdf': new pdfProvider(),
-	'docs': new docsProvider()
+	'docs': new docsProvider(),
+	
 }
 
 module.exports = {
 
 	run(win) {
 
-		let text = clipboard.readText('selection')
+		let text = clipboard.readText('selection');
+
 		let provider = null
 		for(let key in matchers){
 			if(matchers[key].matcher(text) !== false){
@@ -29,7 +31,13 @@ module.exports = {
 			win.webContents.send('invalidUrl', 'ping')
 			return
 		}
+		
+		matchers[provider].text = text;
 
-		applyMedia(matchers[provider].getContent, win)
+		if(arguments[1]) {
+			matchers[provider].text = arguments[1];
+		}
+		
+		applyMedia(matchers[provider].content, win)
 	}
 }

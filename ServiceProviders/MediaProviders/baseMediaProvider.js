@@ -1,5 +1,3 @@
-const {clipboard} = require('electron')
-
 class baseMediaProvider {
 
 	constructor() {
@@ -12,9 +10,12 @@ class baseMediaProvider {
 		}
 	}
 
-	get getContent() {
-		let link = clipboard.readText('selection')
-		if(this.extractContents(link)){
+	set text(link) {
+		this.extractContents(link)
+	}
+
+	get content() {
+		if(this.response.content != '' || this.response.link != undefined){
 			// console.log(this.response)
 			return this
 		}
@@ -27,9 +28,12 @@ class baseMediaProvider {
 	}
 
 	//method
-	extractContents(link=null) {
-		// to be implemented by inheriting objects
-		return true
+	extractContents(link) {
+		if (link != undefined || link != '') {  
+			this.response.content = link
+	  	}
+
+	  	return true
 	}
 
 	postWinLoad(win){
