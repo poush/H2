@@ -1,6 +1,6 @@
-// Modules to control application life and create native browser window
 const { app, Menu, Tray, BrowserWindow, globalShortcut, session } = require('electron')
 const providers = require('./ServiceProviders/providers')
+const fullscreenToggle = require('./lib/fullscreen-toggle')
 const utils = require('./lib/util');
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -47,14 +47,13 @@ function createWindow() {
     mainWindow = null
   })
 
-
   // Disable new browser windows and popups
   mainWindow.webContents.on("new-window", function (e, url) {
     e.preventDefault();
     providers.run(mainWindow, url)
     mainWindow.focus();
   });
-
+  
   globalShortcut.register('CommandOrControl+Shift+V', () => {
     providers.run(mainWindow)
   })
@@ -79,6 +78,9 @@ function createWindow() {
   globalShortcut.register('CommandOrControl+Shift+2', () => {
     mainWindow.webContents.send('play', 'ping')
   })
+  globalShortcut.register('Alt+Shift+F', () => {
+    fullscreenToggle(mainWindow, false)
+  })
 
   // Useful in a scenario where the window becomes irresponsive
   // and the native "quit" shortcut doesn't work
@@ -92,6 +94,12 @@ let createMenuTray = () => {
 
   const trayMenus = [
     { role: 'about' },
+    { label: 'Exit Fullscreen', 
+      accelerator: 'esc', 
+      click() { 
+        fullscreenToggle(mainWindow, true) 
+      }
+    },
     { label: 'Quit', click() { app.quit() } },
     { label: 'Bring H2 to the front',
       click() {
