@@ -1,4 +1,4 @@
-const { app, Menu, Tray, BrowserWindow, globalShortcut, session } = require('electron')
+const { app, Menu, Tray, BrowserWindow, globalShortcut, session, ipcMain } = require('electron')
 const providers = require('./ServiceProviders/providers')
 const fullscreenToggle = require('./lib/fullscreen-toggle')
 const utils = require('./lib/util');
@@ -94,8 +94,7 @@ let createMenuTray = () => {
 
   const trayMenus = [
     { role: 'about' },
-    { label: 'Exit Fullscreen', 
-      accelerator: 'esc', 
+    { label: 'Exit Fullscreen',
       click() { 
         fullscreenToggle(mainWindow, true) 
       }
@@ -158,5 +157,8 @@ app.on('activate', function () {
   }
 })
 
+ipcMain.on('exit-full-screen', () => {
+  fullscreenToggle(mainWindow, true)
+})
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and require them here.

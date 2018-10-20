@@ -65,6 +65,10 @@ function defaultiFrame(arg) {
 
 }
 
+window.addEventListener('keyup', function(e){
+  if(e.key == 'Escape')
+    ipcRenderer.send('exit-full-screen')
+})
 
 ipcRenderer.on('pause', (ev, arg) => {
   pause()
