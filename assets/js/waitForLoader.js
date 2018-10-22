@@ -15,7 +15,6 @@ const waitForLoader = (DOMSelector, MAX_TIME = 10000) => {
     waitForContainerElement(resolve, reject);
   });
 };
-const docBody = document.body;
 let loader = document.createElement("div");
 loader.setAttribute("id", "loading");
 loader.setAttribute("class", "loading");
