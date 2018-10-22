@@ -16,19 +16,18 @@ Inspired by the Helium app, **H2** is a minimalist browser to watch embeded vide
 
 # Example
 
-![sample](img.png)
+![demo](img/demo.gif)
 
 ## Installation
 
-- [Windows](guides/windows.md)
-
-- [Mac](guides/mac.md)
-
-- [Linux](guides/linux.md)
+- [Windows](docs/windows.md)
+- [Mac](docs/mac.md)
+- [Linux](docs/linux.md)
 
 ## Usage
 
 - Copy any youtube, PDF or google docs URL and press `Ctrl/Command + Shift + V`
+- [Keyboards Shortcuts](docs/shortcuts.md)
 
 ## Contributing
 
@@ -52,7 +51,7 @@ npm start
 
 ## Bug
 
-Sometimes app doesn't run over the top of mac screens
+[Known Bugs](https://github.com/poush/H2/issues?q=is%3Aopen+is%3Aissue+label%3Abug)
 
 ## Credits
 

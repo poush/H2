@@ -1,6 +1,6 @@
-import baseMediaProvider from "./baseMediaProvider";
+const baseMediaProvider = require("./baseMediaProvider");
 
-export class docsProvider extends baseMediaProvider {
+class docsProvider extends baseMediaProvider {
   constructor() {
     super();
     this.name = "googleDocs";
@@ -28,3 +28,5 @@ export class docsProvider extends baseMediaProvider {
     return true;
   }
 }
+
+module.exports = docsProvider;

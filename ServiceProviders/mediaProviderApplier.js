@@ -1,10 +1,9 @@
-import baseMediaProvider from "./MediaProviders/baseMediaProvider";
+const baseMediaProvider = require("./MediaProviders/baseMediaProvider");
 
-export default function(toApply, win) {
+module.exports = function(toApply, win) {
   if (toApply instanceof baseMediaProvider) {
     if (toApply.response.type === "iframe") {
       win.loadFile("./index.html");
-      console.log("test");
 
       win.webContents.once("dom-ready", () => {
         win.webContents.send(
@@ -18,4 +17,4 @@ export default function(toApply, win) {
       toApply.postWinLoad(win);
     }
   }
-}
+};

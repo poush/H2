@@ -1,6 +1,4 @@
-import { clipboard } from "electron";
-
-export default class baseMediaProvider {
+class baseMediaProvider {
   constructor() {
     this.version = "0.1";
     this.name = "base";
@@ -11,9 +9,12 @@ export default class baseMediaProvider {
     };
   }
 
-  get getContent() {
-    let link = clipboard.readText("selection");
-    if (this.extractContents(link)) {
+  set text(link) {
+    this.extractContents(link);
+  }
+
+  get content() {
+    if (this.response.content != "" || this.response.link != undefined) {
       // console.log(this.response)
       return this;
     }
@@ -24,8 +25,11 @@ export default class baseMediaProvider {
   matcher(link) {}
 
   //method
-  extractContents(link = null) {
-    // to be implemented by inheriting objects
+  extractContents(link) {
+    if (link != undefined || link != "") {
+      this.response.content = link;
+    }
+
     return true;
   }
 
@@ -38,3 +42,5 @@ export default class baseMediaProvider {
     return true;
   }
 }
+
+module.exports = baseMediaProvider;
