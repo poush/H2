@@ -4,10 +4,15 @@ Inspired by the Helium app, **H2** is a minimalist browser to watch embeded vide
 
 # Features
 
-:tv: Works with any Youtube URL.  
-:scroll: Works with PDFs links, Google Docs URLs.  
-:computer: Works on all platforms, thanks to electron ❤️  
-:clock9:[WIP] After [#22](https://github.com/poush/H2/pull/22) a basic image editor, many other features coming soon.
+:tv: Works with any Youtube URL.
+
+:scroll: Works with PDFs links, Google Docs URLs.
+
+:computer: Works on all platforms, thanks to electron ❤️
+
+:art: Image editor supports contrast, brightness, hue, sepia and save as PNG.
+
+:clock9:[WIP] Many other features coming soon.
 
 # Example
 
@@ -16,7 +21,9 @@ Inspired by the Helium app, **H2** is a minimalist browser to watch embeded vide
 ## Installation
 
 - [Windows](guides/windows.md)
+
 - [Mac](guides/mac.md)
+
 - [Linux](guides/linux.md)
 
 ## Usage
@@ -27,12 +34,19 @@ Inspired by the Helium app, **H2** is a minimalist browser to watch embeded vide
 
 ```bash
 # Clone this repository
+
 git clone https://github.com/poush/h2
+
 # Go into the repository
+
 cd h2
+
 # Install dependencies
+
 npm install
+
 # Run the app
+
 npm start
 ```
 
@@ -41,6 +55,11 @@ npm start
 Sometimes app doesn't run over the top of mac screens
 
 ## Credits
+
+| Contributor                                                               |       Name |                                   |
+| ------------------------------------------------------------------------- | ---------: | --------------------------------: |
+| ![Poush](https://avatars0.githubusercontent.com/u/1812082?s=85&v=4)       |  Piyush A. |     [★](https://github.com/poush) |
+| ![Rouzbeh Hz](https://avatars2.githubusercontent.com/u/40371763?s=85&v=4) | Rouzbeh Hz | [★](https://github.com/rouzbehhz) |
 
 ## License
 
