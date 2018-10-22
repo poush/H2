@@ -62,7 +62,6 @@ function createWindow() {
   });
 
   mainWindow.webContents.on("confirm", function(e) {
-    alert("lol!");
     mainWindow.focus();
   });
 
