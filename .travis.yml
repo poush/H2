@@ -1,4 +1,3 @@
-os: osx
 language: node_js
 node_js: 8
 
@@ -15,10 +14,9 @@ cache:
     - /tmp/jest-electron-builder-tests
 
 install:
-  - brew install wine
   - curl -L https://yarnpkg.com/latest.tar.gz | tar xz && mv yarn-* $HOME/.yarn
   - export PATH="$HOME/.yarn/bin:$PATH"
   - yarn
 
 script:
-  - yarn build
+  - npm run test

@@ -6,7 +6,8 @@
   "scripts": {
     "start": "electron .",
     "build": "electron-builder --win --linux --mac",
-    "lint": "eslint ./**/*.js"
+    "lint": "eslint ./**/*.js",
+    "test": "mocha tests/spec.js --timeout 15000"
   },
   "build": {
     "appId": "com.ipiush.h2"
@@ -22,6 +23,8 @@
   "author": "GitHub",
   "license": "CC0-1.0",
   "devDependencies": {
+    "chai": "^4.2.0",
+    "chai-as-promised": "^7.1.1",
     "electron": "^2.0.0",
     "electron-builder": "^20.28.4",
     "eslint": "^5.7.0",
@@ -29,7 +32,9 @@
     "eslint-plugin-import": "^2.14.0",
     "eslint-plugin-node": "^7.0.1",
     "eslint-plugin-promise": "^4.0.1",
-    "eslint-plugin-standard": "^4.0.0"
+    "eslint-plugin-standard": "^4.0.0",
+    "mocha": "^5.2.0",
+    "spectron": "^4.0.0"
   },
   "dependencies": {}
 }
