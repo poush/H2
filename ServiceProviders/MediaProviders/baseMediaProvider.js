@@ -1,44 +1,40 @@
-import {clipboard} from 'electron'
+import { clipboard } from "electron";
 
 export default class baseMediaProvider {
+  constructor() {
+    this.version = "0.1";
+    this.name = "base";
+    this.response = {
+      eventName: "default",
+      type: "link",
+      content: ""
+    };
+  }
 
-	constructor() {
-		this.version = '0.1'
-		this.name = 'base'
-		this.response = {
-			eventName: 'default',
-			type: 'link',
-			content: ''
-		}
-	}
+  get getContent() {
+    let link = clipboard.readText("selection");
+    if (this.extractContents(link)) {
+      // console.log(this.response)
+      return this;
+    }
 
-	get getContent() {
-		let link = clipboard.readText('selection')
-		if(this.extractContents(link)){
-			// console.log(this.response)
-			return this
-		}
+    throw "InvalidContentByContentExtraction";
+  }
 
-		throw "InvalidContentByContentExtraction"
-	}
+  matcher(link) {}
 
-	matcher(link) {
+  //method
+  extractContents(link = null) {
+    // to be implemented by inheriting objects
+    return true;
+  }
 
-	}
+  postWinLoad(win) {
+    return true;
+  }
 
-	//method
-	extractContents(link=null) {
-		// to be implemented by inheriting objects
-		return true
-	}
-
-	postWinLoad(win){
-		return true
-	}
-
-	preWinLoad(win) {
-		//must return true
-		return true
-	}
-
+  preWinLoad(win) {
+    //must return true
+    return true;
+  }
 }
