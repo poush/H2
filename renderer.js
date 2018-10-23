@@ -43,17 +43,14 @@ async function putYoutube(videoId) {
   });
 }
 
-function pause() {
+function togglePlay() {
   if (player) {
-    player.pauseVideo()
-  } else {
-    alert("Play a video first");
-  }
-}
-
-function play() {
-  if (player) {
-    player.playVideo()
+    if(player.getPlayerState() == 1) {
+        player.pauseVideo()
+    } else if (player.getPlayerState() != 1) {
+        player.playVideo()
+    }
+    
   } else {
     alert("Play a video first");
   }
@@ -70,12 +67,8 @@ window.addEventListener('keyup', function(e){
     ipcRenderer.send('exit-full-screen')
 })
 
-ipcRenderer.on('pause', (ev, arg) => {
-  pause()
-})
-
-ipcRenderer.on('play', (ev, arg) => {
-  play()
+ipcRenderer.on('togglePlay', (ev, arg) => {
+  togglePlay()
 })
 
 ipcRenderer.on('youtube', (ev, arg) => {
