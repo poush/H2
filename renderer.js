@@ -15,8 +15,13 @@ let apiPromise = new Promise(resolve => {
   }
   const tag = document.createElement('script');
   tag.src = "https://www.youtube.com/iframe_api";
+  
+  const vimeo = document.createElement('script');
+  vimeo.src = "https://player.vimeo.com/api/player.js";
+
   const firstScriptTag = document.getElementsByTagName('script')[0];
   firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+  firstScriptTag.parentNode.insertBefore(vimeo, firstScriptTag);
 });
 
 
@@ -41,6 +46,18 @@ async function putYoutube(videoId) {
       }
     }
   });
+}
+async function putVimeo(videoId) {
+
+  await apiPromise
+  var options = {
+    id: videoId,
+    autoplay: true,
+    playsinline: false,
+    width: 400,
+    height: 300
+  };
+  player = new Vimeo.Player(document.querySelector("#video"), options);
 }
 
 function pause() {
@@ -81,6 +98,10 @@ ipcRenderer.on('play', (ev, arg) => {
 ipcRenderer.on('youtube', (ev, arg) => {
   console.log('called')
   putYoutube(arg)
+})
+
+ipcRenderer.on('vimeo', (ev, arg) => {
+  putVimeo(arg)
 })
 
 ipcRenderer.on('googleDocs', (ev, arg) => {
