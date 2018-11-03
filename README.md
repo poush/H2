@@ -53,12 +53,6 @@ npm start
 
 [Known Bugs](https://github.com/poush/H2/issues?q=is%3Aopen+is%3Aissue+label%3Abug)
 
-## Credits
-
-| Contributor                                                               |       Name |                                   |
-| ------------------------------------------------------------------------- | ---------: | --------------------------------: |
-| ![Poush](https://avatars0.githubusercontent.com/u/1812082?s=85&v=4)       |  Piyush A. |     [★](https://github.com/poush) |
-| ![Rouzbeh Hz](https://avatars2.githubusercontent.com/u/40371763?s=85&v=4) | Rouzbeh Hz | [★](https://github.com/rouzbehhz) |
 
 ## License
 
