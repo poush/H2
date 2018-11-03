@@ -23,7 +23,6 @@ function createWindow() {
   // Create the browser window.
   mainWindow = new BrowserWindow(config)
   mainWindow.setMenu(null)
-
   // Set always on top
   if (process.platform == 'darwin')
     app.dock.hide()
@@ -72,11 +71,8 @@ function createWindow() {
     utils.resetWindowToFloat(mainWindow);
   })
 
-  globalShortcut.register('CommandOrControl+Shift+1', () => {
-    mainWindow.webContents.send('pause', 'ping')
-  })
-  globalShortcut.register('CommandOrControl+Shift+2', () => {
-    mainWindow.webContents.send('play', 'ping')
+  globalShortcut.register('CommandOrControl+Shift+Space', () => {
+    mainWindow.webContents.send('togglePlay', 'ping')
   })
   globalShortcut.register('Alt+Shift+F', () => {
     fullscreenToggle(mainWindow, false)
