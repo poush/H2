@@ -4,11 +4,10 @@
 
 - Paste url `Ctrl/Command + Shift + V`
 - Toggle translucent mode `Ctrl/Command + Shift + T`
-- Fullscreen `Alt/Option + Shift + F` (Not implemented yet. See [PR #26](https://github.com/poush/H2/pull/26))
+- Fullscreen `Alt/Option + Shift + F`
 - Bring window to top `Alt/Option + Shift + T`
 - Force close `Ctrl/Command + H + Q`
 
 ## Playback
 
-- Pause `Ctrl/Command + Shift + 1`
-- Play `Ctrl/Command + Shift + 2`
+- Play / Pause `Ctrl/Command + Shift + Space`

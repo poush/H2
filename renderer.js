@@ -42,17 +42,13 @@ async function putYoutube(videoId) {
   document.body.innerHTML += `<button onclick="location.reload()" style="cursor:pointer;border:none;background:none;z-index:999999;margin:60vh 82% 0 0;opacity:.5;font-weight:800"><svg version="1.1" id="h2-icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 27 25"  xml:space="preserve"><g><circle class="white" cx="13.5" cy="22.8" r="2.1"></circle><polygon class="white" points="13.5,0 0,11.2 0,24.6 2.8,24.6 2.8,12.5 13.5,3.7 24.2,12.5 24.2,24.6 27,24.6 27,11.2 	"></polygon></g></svg></button>`;
 }
 
-function pause() {
+function togglePlay() {
   if (player) {
-    player.pauseVideo();
-  } else {
-    alert("Play a video first");
-  }
-}
-
-function play() {
-  if (player) {
-    player.playVideo();
+    if(player.getPlayerState() == 1) {
+        player.pauseVideo()
+    } else if (player.getPlayerState() != 1) {
+        player.playVideo()
+    }
   } else {
     alert("Play a video first");
   }
@@ -63,13 +59,14 @@ function defaultiFrame(arg) {
   document.querySelector("#video").innerHTML = web;
 }
 
-window.addEventListener("keyup", function(e) {
-  if (e.key == "Escape") ipcRenderer.send("exit-full-screen");
-});
+window.addEventListener('keyup', function(e){
+  if(e.key == 'Escape')
+    ipcRenderer.send('exit-full-screen')
+})
 
-ipcRenderer.on("play", (ev, arg) => {
-  play();
-});
+ipcRenderer.on('togglePlay', (ev, arg) => {
+  togglePlay()
+})
 
 ipcRenderer.on("youtube", (ev, arg) => {
   console.log("called");

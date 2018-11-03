@@ -31,6 +31,7 @@ function createWindow() {
   mainWindow = new BrowserWindow(config);
   mainWindow.setMenu(null);
 
+
   // Set always on top
 
   if (process.platform == "darwin") app.dock.hide();
