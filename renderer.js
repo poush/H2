@@ -2,8 +2,8 @@
 // be executed in the renderer process for that window.
 // All of the Node.js APIs are available in this process.
 
-let { clipboard, ipcRenderer } = require('electron')
-const notif = require('./lib/notifications')
+let { clipboard, ipcRenderer } = require("electron");
+const notif = require("./lib/notifications");
 
 let player;
 
@@ -12,8 +12,8 @@ let apiPromise = new Promise(resolve => {
   window.onYouTubeIframeAPIReady = () => {
     //     console.log("YouTube API loaded");
     resolve();
-  }
-  const tag = document.createElement('script');
+  };
+  const tag = document.createElement("script");
   tag.src = "https://www.youtube.com/iframe_api";
   
   const vimeo = document.createElement('script');
@@ -24,28 +24,27 @@ let apiPromise = new Promise(resolve => {
   firstScriptTag.parentNode.insertBefore(vimeo, firstScriptTag);
 });
 
-
 async function putYoutube(videoId) {
-
-  await apiPromise
+  await apiPromise;
   player = new YT.Player(document.querySelector("#video"), {
-    height: '100%',
-    width: '100%',
+    height: "100%",
+    width: "100%",
     videoId: videoId,
-    playerVars: { 
-      'autoplay': 1,
-      'fs': 0,
-      'modestbranding': 1
+    playerVars: {
+      autoplay: 1,
+      fs: 0,
+      modestbranding: 1
     },
     events: {
-      onReady: (event) => {
+      onReady: event => {
         // console.log(event)
       },
-      onStateChange: (event) => {
+      onStateChange: event => {
         // console.log(event)
       }
     }
   });
+  document.body.innerHTML += `<button onclick="location.reload()" style="cursor:pointer;border:none;background:none;z-index:999999;margin:60vh 82% 0 0;opacity:.5;font-weight:800"><svg version="1.1" id="h2-icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 27 25"  xml:space="preserve"><g><circle class="white" cx="13.5" cy="22.8" r="2.1"></circle><polygon class="white" points="13.5,0 0,11.2 0,24.6 2.8,24.6 2.8,12.5 13.5,3.7 24.2,12.5 24.2,24.6 27,24.6 27,11.2 	"></polygon></g></svg></button>`;
 }
 async function putVimeo(videoId) {
 
@@ -60,26 +59,21 @@ async function putVimeo(videoId) {
   player = new Vimeo.Player(document.querySelector("#video"), options);
 }
 
-function pause() {
+function togglePlay() {
   if (player) {
-    player.pauseVideo()
-  } else {
-    alert("Play a video first");
-  }
-}
-
-function play() {
-  if (player) {
-    player.playVideo()
+    if(player.getPlayerState() == 1) {
+        player.pauseVideo()
+    } else if (player.getPlayerState() != 1) {
+        player.playVideo()
+    }
   } else {
     alert("Play a video first");
   }
 }
 
 function defaultiFrame(arg) {
-  let web = `<iframe src="${arg}" frameborder="0" sandbox="allow-scripts allow-popups allow-forms allow-same-origin" allowfullscreen="" style="position: absolute; left: 0px; top: 0px; width: 100%; height: 100%; border-radius: 1px; pointer-events: auto; background-color: rgb(247, 246, 245);"></iframe>`
-  document.querySelector('#video').innerHTML = web
-
+  let web = `<iframe src="${arg}" frameborder="0" sandbox="allow-scripts allow-popups allow-forms allow-same-origin" allowfullscreen="" style="position: absolute; left: 0px; top: 0px; width: 100%; height: 100%; border-radius: 1px; pointer-events: auto; background-color: rgb(247, 246, 245);"></iframe>`;
+  document.querySelector("#video").innerHTML = web;
 }
 
 window.addEventListener('keyup', function(e){
@@ -87,18 +81,14 @@ window.addEventListener('keyup', function(e){
     ipcRenderer.send('exit-full-screen')
 })
 
-ipcRenderer.on('pause', (ev, arg) => {
-  pause()
+ipcRenderer.on('togglePlay', (ev, arg) => {
+  togglePlay()
 })
 
-ipcRenderer.on('play', (ev, arg) => {
-  play()
-})
-
-ipcRenderer.on('youtube', (ev, arg) => {
-  console.log('called')
-  putYoutube(arg)
-})
+ipcRenderer.on("youtube", (ev, arg) => {
+  console.log("called");
+  putYoutube(arg);
+});
 
 ipcRenderer.on('vimeo', (ev, arg) => {
   putVimeo(arg)
@@ -108,9 +98,9 @@ ipcRenderer.on('googleDocs', (ev, arg) => {
   defaultiFrame(arg)
 })
 
-ipcRenderer.on('invalidUrl', () => {
-  notif('Oops! This isn\'t supported URL')
-})
+ipcRenderer.on("invalidUrl", () => {
+  notif("Oops! This isn't supported URL");
+});
 
 ipcRenderer.on("alertUser", (event, message, url) => {
   var userInput = confirm(message);
