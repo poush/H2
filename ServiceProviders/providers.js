@@ -1,14 +1,18 @@
-const youtubeProvider = require("./MediaProviders/youtube");
-const pdfProvider = require("./MediaProviders/pdf");
-const docsProvider = require("./MediaProviders/docs");
-const applyMedia = require("./mediaProviderApplier");
-const { clipboard } = require("electron");
+const youtubeProvider  = require('./MediaProviders/youtube')
+const vimeoProvider	   = require('./MediaProviders/vimeo')
+const pdfProvider  	   = require('./MediaProviders/pdf')
+const docsProvider     = require('./MediaProviders/docs')
+const applyMedia  	   = require('./mediaProviderApplier')
+const {clipboard} = require('electron')
+
 
 let matchers = {
   youtube: new youtubeProvider(),
   pdf: new pdfProvider(),
-  docs: new docsProvider()
+  docs: new docsProvider(),
+  'vimeo' : new vimeoProvider(),
 };
+
 
 module.exports = {
   run(win) {
