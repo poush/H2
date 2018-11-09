@@ -1,43 +1,38 @@
-const youtubeProvider  = require('./MediaProviders/youtube')
-const pdfProvider  	   = require('./MediaProviders/pdf')
-const docsProvider     = require('./MediaProviders/docs')
-const applyMedia  	   = require('./mediaProviderApplier')
-const {clipboard} = require('electron')
-
+const youtubeProvider = require("./MediaProviders/youtube");
+const pdfProvider = require("./MediaProviders/pdf");
+const docsProvider = require("./MediaProviders/docs");
+const applyMedia = require("./mediaProviderApplier");
+const { clipboard } = require("electron");
 
 let matchers = {
-
-	'youtube' : new youtubeProvider(),
-	'pdf': new pdfProvider(),
-	'docs': new docsProvider(),
-	
-}
+  youtube: new youtubeProvider(),
+  pdf: new pdfProvider(),
+  docs: new docsProvider()
+};
 
 module.exports = {
+  run(win) {
+    let text = clipboard.readText("selection");
 
-	run(win) {
+    let provider = null;
+    for (let key in matchers) {
+      if (matchers[key].matcher(text) !== false) {
+        provider = key;
+        break;
+      }
+    }
 
-		let text = clipboard.readText('selection');
+    if (provider == null) {
+      win.webContents.send("invalidUrl", "ping");
+      return;
+    }
 
-		let provider = null
-		for(let key in matchers){
-			if(matchers[key].matcher(text) !== false){
-				provider = key
-				break;
-			}
-		}
+    matchers[provider].text = text;
 
-		if(provider == null){
-			win.webContents.send('invalidUrl', 'ping')
-			return
-		}
-		
-		matchers[provider].text = text;
+    if (arguments[1]) {
+      matchers[provider].text = arguments[1];
+    }
 
-		if(arguments[1]) {
-			matchers[provider].text = arguments[1];
-		}
-		
-		applyMedia(matchers[provider].content, win)
-	}
-}
+    applyMedia(matchers[provider].content, win);
+  }
+};

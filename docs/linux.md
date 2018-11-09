@@ -6,9 +6,9 @@ Follow the steps from below
 
 ### Shell script installation
 
-* For first time install clone the repo https://github.com/poush/h2.git
-* Run the shell script `cd h2/install`
-* `sh ./linux.sh`
+- For first time install clone the repo https://github.com/poush/h2.git
+- Run the shell script `cd h2/install`
+- `sh ./linux.sh`
 
 Once started we will be default window like below
 
@@ -18,15 +18,14 @@ Paste any youtube url on opened window using `cmd + shift + v`
 
 ![Alt text](../img/step1.png)
 
-
 Move the window to any place!
-
 
 ![Alt text](../img/step2.png)
 
 ### Problems on Ubuntu 18.04
 
 On Ubuntu 18.04 this error message can be displayed
+
 ```
 error while loading shared libraries: libgconf-2.so.4: cannot open shared object file: No such file or directory
 npm ERR! file sh
