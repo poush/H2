@@ -7,7 +7,7 @@ const notif = require("./lib/notifications");
 
 let player;
 
-// promise for loading Youtube Api
+
 let apiPromise = new Promise(resolve => {
   window.onYouTubeIframeAPIReady = () => {
     //     console.log("YouTube API loaded");
@@ -15,18 +15,14 @@ let apiPromise = new Promise(resolve => {
   };
   const tag = document.createElement("script");
   tag.src = "https://www.youtube.com/iframe_api";
-  
-  const vimeo = document.createElement('script');
-  vimeo.src = "https://player.vimeo.com/api/player.js";
 
-  const firstScriptTag = document.getElementsByTagName('script')[0];
+  let firstScriptTag = document.getElementsByTagName('script')[0];
   firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-  firstScriptTag.parentNode.insertBefore(vimeo, firstScriptTag);
 });
 
 async function putYoutube(videoId) {
-  await apiPromise;
-  player = new YT.Player(document.querySelector("#video"), {
+  await apiPromise
+  let pl = new YT.Player(document.querySelector("#video"), {
     height: "100%",
     width: "100%",
     videoId: videoId,
@@ -45,26 +41,33 @@ async function putYoutube(videoId) {
     }
   });
   document.body.innerHTML += `<button onclick="location.reload()" style="cursor:pointer;border:none;background:none;z-index:999999;margin:60vh 82% 0 0;opacity:.5;font-weight:800"><svg version="1.1" id="h2-icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 27 25"  xml:space="preserve"><g><circle class="white" cx="13.5" cy="22.8" r="2.1"></circle><polygon class="white" points="13.5,0 0,11.2 0,24.6 2.8,24.6 2.8,12.5 13.5,3.7 24.2,12.5 24.2,24.6 27,24.6 27,11.2 	"></polygon></g></svg></button>`;
-}
-async function putVimeo(videoId) {
 
-  await apiPromise
-  var options = {
+  player = {
+    api: pl,
+    status: 1
+  }
+}
+
+function putVimeo(videoId) {
+  let pl = new Vimeo.Player(document.querySelector("#video"), {
     id: videoId,
     autoplay: true,
-    playsinline: false,
-    width: 400,
-    height: 300
-  };
-  player = new Vimeo.Player(document.querySelector("#video"), options);
+    transparent: false
+  });
+  player = {
+    api: pl,
+    status: 1
+  }
 }
 
 function togglePlay() {
   if (player) {
-    if(player.getPlayerState() == 1) {
+    if(player.status == 1) {
         player.pauseVideo()
-    } else if (player.getPlayerState() != 1) {
+        player.status = 0
+    } else if (player.status == 0) {
         player.playVideo()
+        player.status = 1
     }
   } else {
     alert("Play a video first");

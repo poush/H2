@@ -394,3 +394,8 @@ input[type="range"]::-ms-thumb {
 #h2-icon .white {
   fill: #ffffff;
 }
+
+iframe{
+  height: 100% !important;
+  width: 100% !important;
+}

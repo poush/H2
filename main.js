@@ -44,7 +44,7 @@ function createWindow() {
   // mainWindow.loadURL('https://www.netflix.com')
 
   // Open the DevTools.
-  if (process.env.DEV) mainWindow.webContents.openDevTools();
+  if (process.env.DEV==1) mainWindow.webContents.openDevTools();
 
   // Emitted when the window is closed.
   mainWindow.on("closed", function() {
