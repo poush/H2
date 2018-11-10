@@ -10,7 +10,7 @@ const {
 const providers = require("./ServiceProviders/providers");
 const fullscreenToggle = require("./lib/fullscreen-toggle");
 const utils = require("./lib/util");
-
+const ActionManager = require("./core/action-manager")
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -32,9 +32,6 @@ function createWindow() {
   // Create the browser window.
   mainWindow = new BrowserWindow(config);
   mainWindow.setMenu(null);
-
-
-  // Set always on top
 
   if (process.platform == "darwin") app.dock.hide();
 
@@ -64,39 +61,14 @@ function createWindow() {
     mainWindow.focus();
   });
 
-  globalShortcut.register("CommandOrControl+Shift+V", () => {
-    providers.run(mainWindow);
-  });
-  globalShortcut.register("CommandOrControl+Shift+T", () => {
-    // toggles translucent mode
-    var translucency = 1;
-    if (mainWindow.getOpacity() == 1) {
-      translucency = 0.7;
-    }
-    mainWindow.setOpacity(translucency);
-    mainWindow.setIgnoreMouseEvents(translucency < 1);
-  });
+  let actionManager = new ActionManager(mainWindow)
+  actionManager.applyActions()
 
-  globalShortcut.register("Alt+Shift+T", () => {
-    // brings the window to top always
-    utils.resetWindowToFloat(mainWindow);
-  });
-
-  globalShortcut.register("CommandOrControl+Shift+1", () => {
-    mainWindow.webContents.send("pause", "ping");
-  });
-  globalShortcut.register("CommandOrControl+Shift+2", () => {
-    mainWindow.webContents.send("play", "ping");
-  });
-  globalShortcut.register("Alt+Shift+F", () => {
-    fullscreenToggle(mainWindow, false);
-  });
-
-  // Useful in a scenario where the window becomes irresponsive
-  // and the native "quit" shortcut doesn't work
-  globalShortcut.register("CommandOrControl+H+Q", () => {
-    app.quit();
-  });
+  // DEPRECATED, Doesn't Work. TODO: Test before removing
+  // globalShortcut.register("Alt+Shift+T", () => {
+  //   // brings the window to top always
+  //   utils.resetWindowToFloat(mainWindow);
+  // });
 }
 
 let createMenuTray = () => {
