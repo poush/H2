@@ -6,7 +6,8 @@
   "scripts": {
     "start": "electron .",
     "build": "electron-builder --win --linux --mac",
-    "lint": "eslint ./**/*.js"
+    "lint": "eslint ./**/*.js",
+    "lint:fix": "eslint ./**/*.js --fix"
   },
   "build": {
     "appId": "com.ipiush.h2"
