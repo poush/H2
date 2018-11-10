@@ -1,10 +1,11 @@
-os: osx
+os: linux
 language: node_js
 node_js: 8
 
-env:
-  global:
-    - FORCE_COLOR=1
+before_script:
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then export DISPLAY=:99.0; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sh -e /etc/init.d/xvfb start; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sleep 3; fi
 
 cache:
   yarn: true
@@ -15,10 +16,9 @@ cache:
     - /tmp/jest-electron-builder-tests
 
 install:
-  - brew install wine
   - curl -L https://yarnpkg.com/latest.tar.gz | tar xz && mv yarn-* $HOME/.yarn
   - export PATH="$HOME/.yarn/bin:$PATH"
   - yarn
 
 script:
-  - yarn build
+  - npm run test

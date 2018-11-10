@@ -6,31 +6,35 @@
   "scripts": {
     "start": "electron .",
     "build": "electron-builder --win --linux --mac",
-    "lint": "eslint ./src/**/*.js --fix",
-    "lint:fix": "eslint ./src/**/*.js --fix"
+    "lint": "eslint ./src/**/*.js ./tests/**/*.js",
+    "lint:fix": "eslint ./src/**/*.js ./tests/**/*.js --fix",
+    "test": "mocha tests/spec.js --timeout 30000"
   },
   "build": {
     "appId": "com.ipiush.h2"
   },
   "repository": "https://github.com/poush/h2",
   "keywords": [
-    "Electron",
-    "quick",
-    "start",
-    "tutorial",
-    "demo"
+    "electron",
+    "picture-in-picture",
+    "browser",
+    "embed"
   ],
-  "author": "GitHub",
-  "license": "CC0-1.0",
-  "devDependencies": {
-    "electron": "^2.0.0",
-    "electron-builder": "^20.28.4",
-    "eslint": "^5.7.0",
-    "eslint-config-standard": "^12.0.0",
-    "eslint-plugin-import": "^2.14.0",
-    "eslint-plugin-node": "^7.0.1",
-    "eslint-plugin-promise": "^4.0.1",
-    "eslint-plugin-standard": "^4.0.0"
-  },
-  "dependencies": {}
-}
+  "author": "poush",
+   "license": "CC0-1.0",
+   "devDependencies": {
+     "chai": "^4.2.0",
+     "chai-as-promised": "^7.1.1",
+     "electron": "^2.0.0",
+     "electron-builder": "^20.28.4",
+     "eslint": "^5.7.0",
+     "eslint-config-standard": "^12.0.0",
+     "eslint-plugin-import": "^2.14.0",
+     "eslint-plugin-node": "^7.0.1",
+     "eslint-plugin-promise": "^4.0.1",
+     "eslint-plugin-standard": "^4.0.0",
+     "mocha": "^5.2.0",
+     "spectron": "^4.0.0"
+   },
+   "dependencies": {}
+ }
