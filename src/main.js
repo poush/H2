@@ -10,7 +10,7 @@ const {
 const providers = require("./ServiceProviders/providers");
 const fullscreenToggle = require("./lib/fullscreen-toggle");
 const utils = require("./lib/util");
-const config = require("./lib/config")
+
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
