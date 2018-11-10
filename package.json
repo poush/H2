@@ -2,12 +2,12 @@
   "name": "h2",
   "version": "0.1.0alpha",
   "description": "A mini browser to embed on top of screens",
-  "main": "main.js",
+  "main": "src/main.js",
   "scripts": {
     "start": "electron .",
     "build": "electron-builder --win --linux --mac",
-    "lint": "eslint ./**/*.js",
-    "lint:fix": "eslint ./**/*.js --fix"
+    "lint": "eslint ./src/**/*.js --fix",
+    "lint:fix": "eslint ./src/**/*.js --fix"
   },
   "build": {
     "appId": "com.ipiush.h2"

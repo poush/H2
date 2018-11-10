@@ -10,6 +10,8 @@ const {
 const providers = require("./ServiceProviders/providers");
 const fullscreenToggle = require("./lib/fullscreen-toggle");
 const utils = require("./lib/util");
+
+
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow;
@@ -40,7 +42,7 @@ function createWindow() {
   mainWindow.setFullScreenable(false);
 
   // and load the index.html of the app.
-  mainWindow.loadFile("index.html");
+  mainWindow.loadFile('src/index.html');
   // mainWindow.loadURL('https://www.netflix.com')
 
   // Open the DevTools.
@@ -98,7 +100,7 @@ function createWindow() {
 }
 
 let createMenuTray = () => {
-  tray = new Tray(__dirname + "/tray.png");
+  tray = new Tray(__dirname + "/assets/images/tray.png");
 
   const trayMenus = [
     { role: "about" },
