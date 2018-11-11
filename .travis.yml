@@ -1,10 +1,16 @@
-os: linux
-dist: trusty
+os:
+- linux
+- osx
+
 language: node_js
 node_js: 8
+sudo: false
 
-env:
-- NO_PROXY=127.0.01,localhost
+matrix:
+  allow_failures:
+    - os: osx
+  fast_finish: true
+
 before_script:
 - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then export DISPLAY=:99.0; fi
 - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sh -e /etc/init.d/xvfb start; fi
@@ -27,8 +33,6 @@ script:
 - npm run test
 
 before_deploy:
-- sudo apt-get update
-- sudo apt-get install wine
 - npm run build
 
 deploy:
@@ -36,8 +40,9 @@ deploy:
   api_key:
     secure: SaVLCQxO+jMOdS2WpVpgiA170Nkf3AM5ysVOknrUxei2oYnmUWQWvP3fs3bFXN2S9xoLVvrpYTeio803SErd26CpkHaMik6JSrBT5nWTIQNTXb+YXbzpuuZWRlsRGa2jYRLPqWCTJo2Y1enO0k9yaKsk0MkqhkfY3muja8dgRTQnW2R09ZoP9Iz1OgnGMkES2wlOkuOQUyZYJi0aU9KM0mzZh3H2Z27sSF8aOjbbAac4EqvPTRpKCviMjhAD3MX8+E2IcYfJmi/J8TN64/qhi5yKpBD6PB6A3zKlxhCtqiO2SO8dTBCUd74WdM+0xHTBwaBdwwJsTXVRwmZM3+MoYv4vkFBi1GrvEkXqckk/FnQzWstZf1kzadwU81mucxnjHNJT1OGtM0F4KpBzF3dBvca3FCg4ZuKL/f4l5YEtSKhACCLDB7aaZ8FtAonYIxhaArskvBZ3EhRRtKpwtfkEJ4b4/yuIr6j4PNXFP5bU8VAyTRuGD4ikDf+uyPQ3TF20EXHTtQxyZ16aNex7mOhAJRi/YrpbTmDzoEQHRWkSAnsgMSt8EHr0Z/l10Egjh5XC1RMdUSCxjHU+LRuskuueOXKAc1NYvtEc3bpDYU0Ywc/drTmkSsyVbCtBcxnlMllEaLe8qZqCk225328ayUFvmWK/jl6n83aeLjvejU8NtLQ=
   file:
-  - dist/h2-*.dmg
-  - dist/h2-*.AppImage
-  - dist/h2-*.exe
+  - "dist/h2-*.dmg"
+  - "dist/h2-*.AppImage"
+  - "dist/h2-*.exe"
   on:
     tags: true
+    condition: $TRAVIS_OS_NAME = osx

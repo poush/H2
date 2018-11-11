@@ -5,7 +5,7 @@
   "main": "src/main.js",
   "scripts": {
     "start": "electron .",
-    "build": "electron-builder --win --linux --mac",
+    "build": "electron-builder --win --linux --mac -p never",
     "lint": "eslint ./src/**/*.js ./tests/**/*.js",
     "lint:fix": "eslint ./src/**/*.js ./tests/**/*.js --fix",
     "test": "mocha tests/spec.js --timeout 30000"
