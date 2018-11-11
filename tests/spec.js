@@ -15,7 +15,7 @@ function getApp () {
   var app = new Application({
     path: electronPath,
     args: [appPath],
-    startTimeout: 20000
+    startTimeout: 40000
   })
   return app
 }
