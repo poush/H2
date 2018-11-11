@@ -18,11 +18,6 @@ before_script:
 
 cache:
   yarn: true
-  directories:
-  - node_modules
-  - "$HOME/Library/Caches/electron"
-  - "$HOME/Library/Caches/electron-builder"
-  - "/tmp/jest-electron-builder-tests"
 
 install:
 - curl -L https://yarnpkg.com/latest.tar.gz | tar xz && mv yarn-* $HOME/.yarn
