@@ -1,6 +1,6 @@
 {
   "name": "h2",
-  "version": "0.1.0alpha",
+  "version": "0.1.1alpha",
   "description": "A mini browser to embed on top of screens",
   "main": "src/main.js",
   "scripts": {
@@ -13,7 +13,7 @@
   "build": {
     "appId": "com.ipiush.h2"
   },
-  "repository": "https://github.com/poush/h2",
+  "repository": "https://github.com/poush/H2",
   "keywords": [
     "electron",
     "picture-in-picture",
