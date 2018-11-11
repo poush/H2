@@ -10,6 +10,7 @@ const {
 const providers = require("./ServiceProviders/providers");
 const fullscreenToggle = require("./lib/fullscreen-toggle");
 const utils = require("./lib/util");
+const path = require("path");
 const ActionManager = require("./core/action-manager")
 
 // Keep a global reference of the window object, if you don't, the window will
@@ -24,9 +25,10 @@ function createWindow() {
     height: 300,
     frame: false,
     webPreferences: {
-      plugins: true
+      plugins: true,
+      preload: path.join(__dirname, 'preload.js')
     },
-    titleBarStyle: "customButtonsOnHover"
+    titleBarStyle: "customButtonsOnHover",
   };
 
   // Create the browser window.
@@ -146,6 +148,15 @@ app.on("activate", function() {
 
 ipcMain.on("exit-full-screen", () => {
   fullscreenToggle(mainWindow, true);
+});
+
+ipcMain.on("openLink", (ev, arg) => {
+  console.log(arg)
+  mainWindow.loadURL(arg)
+  mainWindow.webContents.on("did-finish-load", (event, url) => {
+    console.log('asking')
+    mainWindow.webContents.send("send-full-screen", "ping")
+  })
 });
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and require them here.

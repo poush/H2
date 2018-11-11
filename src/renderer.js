@@ -22,7 +22,7 @@ let apiPromise = new Promise(resolve => {
 
 async function putYoutube(videoId) {
   await apiPromise
-  let pl = new YT.Player(document.querySelector("#video"), {
+  let pl = new YT.Player('video', {
     height: "100%",
     width: "100%",
     videoId: videoId,
@@ -33,7 +33,7 @@ async function putYoutube(videoId) {
     },
     events: {
       onReady: event => {
-        // console.log(event)
+        console.log(event)
       },
       onStateChange: event => {
         // console.log(event)
@@ -42,6 +42,7 @@ async function putYoutube(videoId) {
   });
   document.body.innerHTML += `<button onclick="location.reload()" style="cursor:pointer;border:none;background:none;z-index:999999;margin:60vh 82% 0 0;opacity:.5;font-weight:800"><svg version="1.1" id="h2-icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 27 25"  xml:space="preserve"><g><circle class="white" cx="13.5" cy="22.8" r="2.1"></circle><polygon class="white" points="13.5,0 0,11.2 0,24.6 2.8,24.6 2.8,12.5 13.5,3.7 24.2,12.5 24.2,24.6 27,24.6 27,11.2 	"></polygon></g></svg></button>`;
 
+  window.player = pl
   player = {
     api: pl,
     status: 1
@@ -88,9 +89,17 @@ ipcRenderer.on('togglePlay', (ev, arg) => {
   togglePlay()
 })
 
-ipcRenderer.on("youtube", (ev, arg) => {
-  console.log("called");
-  putYoutube(arg);
+ipcRenderer.on("youtube", async (ev, arg) => {
+  await putYoutube(arg);
+  let frame = document.getElementById('video')
+  console.log(frame)
+
+  frame.addEventListener("load", function() {
+    setTimeout( () => {
+      if(document.getElementById('video').contentDocument.querySelector('.ytp-error-content-wrap-reason'))
+        ipcRenderer.send('openLink', 'https://youtube.com/watch?v='+arg)
+    }, 2000)
+  });
 });
 
 ipcRenderer.on('vimeo', (ev, arg) => {
