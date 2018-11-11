@@ -5,7 +5,8 @@ const {
   BrowserWindow,
   globalShortcut,
   session,
-  ipcMain
+  ipcMain,
+  Notification
 } = require("electron");
 const providers = require("./ServiceProviders/providers");
 const fullscreenToggle = require("./lib/fullscreen-toggle");

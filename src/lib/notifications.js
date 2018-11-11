@@ -1,4 +1,4 @@
-module.exports = function (message, onclick = null) {
+module.exports = function (message, sound = true, onclick = null) {
   let notif = new Notification('H2', {
     body: message
   })
