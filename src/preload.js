@@ -74,26 +74,27 @@ function simulate(element, eventName)
     return element;
 }
 
-function extend(destination, source) {
-    for (var property in source)
-      destination[property] = source[property];
-    return destination;
+function extend (destination, source) {
+  for (var property in source) {
+    destination[property] = source[property]
+  }
+  return destination
 }
 
 var eventMatchers = {
-    'HTMLEvents': /^(?:load|unload|abort|error|select|change|submit|reset|focus|blur|resize|scroll)$/,
-    'MouseEvents': /^(?:click|dblclick|mouse(?:down|up|over|move|out))$/
+  'HTMLEvents': /^(?:load|unload|abort|error|select|change|submit|reset|focus|blur|resize|scroll)$/,
+  'MouseEvents': /^(?:click|dblclick|mouse(?:down|up|over|move|out))$/
 }
 var defaultOptions = {
-    pointerX: 0,
-    pointerY: 0,
-    button: 0,
-    ctrlKey: false,
-    altKey: false,
-    shiftKey: false,
-    metaKey: false,
-    bubbles: true,
-    cancelable: true
+  pointerX: 0,
+  pointerY: 0,
+  button: 0,
+  ctrlKey: false,
+  altKey: false,
+  shiftKey: false,
+  metaKey: false,
+  bubbles: true,
+  cancelable: true
 }
 
 ipcRenderer.on('send-full-screen', (ev, arg) => {
