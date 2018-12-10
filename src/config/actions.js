@@ -1,21 +1,20 @@
-const {app} = require("electron");
+const { app } = require('electron')
 
-const providers = require("../ServiceProviders/providers");
-const fullscreenToggle = require("../lib/fullscreen-toggle");
-
+const providers = require('../ServiceProviders/providers')
+const fullscreenToggle = require('../lib/fullscreen-toggle')
 
 module.exports = {
   keys: [
     {
-      key: "CommandOrControl+Shift+V",
+      key: 'CommandOrControl+Shift+V',
       action: (mainWin) => {
         return () => {
-          providers.run(mainWin);
+          providers.run(mainWin)
         }
       }
     },
     {
-      key: "CommandOrControl+H+Q",
+      key: 'CommandOrControl+H+Q',
       action: (mainWin) => {
         return () => {
           app.quit()
@@ -24,40 +23,40 @@ module.exports = {
     },
 
     {
-      key: "CommandOrControl+Shift+1",
+      key: 'CommandOrControl+Shift+1',
       action: (mainWin) => {
         return () => {
-          mainWin.webContents.send("pause", "ping");
+          mainWin.webContents.send('pause', 'ping')
         }
       }
     },
     {
-      key: "CommandOrControl+Shift+2",
+      key: 'CommandOrControl+Shift+2',
       action: (mainWin) => {
         return () => {
-          mainWin.webContents.send("play", "ping");
+          mainWin.webContents.send('play', 'ping')
         }
       }
     },
     {
-      key: "Alt+Shift+F",
+      key: 'Alt+Shift+F',
       action: (mainWin) => {
         return () => {
-          fullscreenToggle(mainWin, false);
+          fullscreenToggle(mainWin, false)
         }
       }
     },
     {
-      key: "CommandOrControl+Shift+T",
+      key: 'CommandOrControl+Shift+T',
       action: (mainWin) => {
         // toggles translucent mode
         return () => {
-          let translucency = 1;
-          if (mainWin.getOpacity() == 1) {
-            translucency = 0.7;
+          let translucency = 1
+          if (mainWin.getOpacity() === 1) {
+            translucency = 0.7
           }
-          mainWin.setOpacity(translucency);
-          mainWin.setIgnoreMouseEvents(translucency < 1);
+          mainWin.setOpacity(translucency)
+          mainWin.setIgnoreMouseEvents(translucency < 1)
         }
       }
     }
