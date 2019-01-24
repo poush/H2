@@ -1,4 +1,4 @@
-# H2
+﻿# H2
 
 Inspired by the Helium app, **H2** is a minimalist browser to watch embeded videos and more in picture-in-picture mode.
 
@@ -57,3 +57,5 @@ npm start
 ## License
 
 [CC0-1.0](https://github.com/poush/H2/blob/master/LICENSE.md)
+
+
