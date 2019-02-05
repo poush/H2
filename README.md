@@ -16,7 +16,7 @@ Inspired by the Helium app, **H2** is a minimalist browser to watch embeded vide
 
 # Example
 
-![demo](https://s3.amazonaws.com/h2org/h2-demo.gif)
+<a href="https://s3.amazonaws.com/h2org/h2-demo.gif" target="_blank">Watch Demo</a>
 
 ## Installation
 
