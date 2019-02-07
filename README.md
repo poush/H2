@@ -34,11 +34,11 @@ Inspired by the Helium app, **H2** is a minimalist browser to watch embeded vide
 ```bash
 # Clone this repository
 
-git clone https://github.com/poush/h2
+git clone https://github.com/h2org/H2
 
 # Go into the repository
 
-cd h2
+cd H2
 
 # Install dependencies
 
@@ -51,9 +51,9 @@ npm start
 
 ## Bug
 
-[Known Bugs](https://github.com/poush/H2/issues?q=is%3Aopen+is%3Aissue+label%3Abug)
+[Known Bugs](https://github.com/h2org/H2/issues?q=is%3Aopen+is%3Aissue+label%3Abug)
 
 
 ## License
 
-[CC0-1.0](https://github.com/poush/H2/blob/master/LICENSE.md)
+[CC0-1.0](https://github.com/h2org/H2/blob/master/LICENSE.md)
