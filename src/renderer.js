@@ -60,8 +60,11 @@ function putVimeo(videoId) {
     status: 1
   }
 }
-
-function togglePlay() {
+function putDailymotion (videoId) {
+  let web = '<iframe frameborder="0" src="https://www.dailymotion.com/embed/video/' + videoId + '" allowfullscreen allow="autoplay"></iframe>'
+  document.querySelector('#video').innerHTML = web
+}
+function togglePlay () {
   if (player) {
     if(player.status == 1) {
         player.pauseVideo()
@@ -105,7 +108,9 @@ ipcRenderer.on("youtube", async (ev, arg) => {
 ipcRenderer.on('vimeo', (ev, arg) => {
   putVimeo(arg)
 })
-
+ipcRenderer.on('dailymotion', (ev, arg) => {
+  putDailymotion(arg)
+})
 ipcRenderer.on('googleDocs', (ev, arg) => {
   defaultiFrame(arg)
 })

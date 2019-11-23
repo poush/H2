@@ -1,5 +1,7 @@
 const youtubeProvider = require('./MediaProviders/youtube')
 const vimeoProvider = require('./MediaProviders/vimeo')
+const dailymotionProvider = require('./MediaProviders/dailymotion')
+
 const pdfProvider = require('./MediaProviders/pdf')
 const docsProvider = require('./MediaProviders/docs')
 const applyMedia = require('./mediaProviderApplier')
@@ -9,7 +11,8 @@ let matchers = {
   youtube: new youtubeProvider(),
   pdf: new pdfProvider(),
   docs: new docsProvider(),
-  'vimeo': new vimeoProvider()
+  vimeo: new vimeoProvider(),
+  dailymotion: new dailymotionProvider()
 }
 
 module.exports = {
