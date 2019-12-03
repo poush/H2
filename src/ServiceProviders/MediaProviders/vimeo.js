@@ -9,7 +9,7 @@ class vimeoProvider extends baseMediaProvider {
   }
   matcher (link) {
     if (link !== undefined || link !== '') {
-      var regExp = /https?:\/\/(?:www\.|player\.)?vimeo.com\/(?:channels\/(?:\w+\/)?|groups\/([^\/]*)\/videos\/|album\/(\d+)\/video\/|video\/|)(\d+)(?:$|\/|\?)/;
+      var regExp = /https?:\/\/(?:www\.|player\.)?vimeo.com\/(?:channels\/(?:\w+\/)?|groups\/([^\/]*)\/videos\/|album\/(\d+)\/video\/|video\/|)(\d+)(?:$|\/|\?)/
       var match = link.match(regExp)
       if (match && match[3].length >= 8) {
         return match[3]
