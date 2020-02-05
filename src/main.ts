@@ -1,55 +1,48 @@
-const {
-  app,
-  Menu,
-  Tray,
-  BrowserWindow,
-  globalShortcut,
-  session,
-  ipcMain,
-  Notification
-} = require("electron");
+import { app, BrowserWindow, BrowserWindowConstructorOptions, globalShortcut, ipcMain, Menu, session, Tray } from "electron";
+
 const providers = require("./ServiceProviders/providers");
 const fullscreenToggle = require("./lib/fullscreen-toggle");
 const utils = require("./lib/util");
 const path = require("path");
-const ActionManager = require("./core/action-manager")
+const ActionManager = require("./core/action-manager");
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
-let mainWindow;
+let mainWindow: BrowserWindow = null;
 let tray;
 
 function createWindow() {
+
   // create config
-  let config = {
-    width: 400,
-    height: 300,
+  const config: BrowserWindowConstructorOptions = {
     frame: false,
+    height: 300,
+    titleBarStyle: "customButtonsOnHover",
     webPreferences: {
       plugins: true,
-      preload: path.join(__dirname, 'preload.js')
+      preload: path.join(__dirname, "preload.js"),
     },
-    titleBarStyle: "customButtonsOnHover",
+    width: 400,
   };
 
   // Create the browser window.
   mainWindow = new BrowserWindow(config);
   mainWindow.setMenu(null);
 
-  if (process.platform == "darwin") app.dock.hide();
+  if (process.platform === "darwin") { app.dock.hide(); }
 
   mainWindow.setVisibleOnAllWorkspaces(true);
   mainWindow.setFullScreenable(false);
 
   // and load the index.html of the app.
-  mainWindow.loadFile('src/index.html');
+  mainWindow.loadFile("src/index.html");
   // mainWindow.loadURL('https://www.netflix.com')
 
   // Open the DevTools.
-  if (process.env.DEV==1) mainWindow.webContents.openDevTools();
+  if (process.env.DEV === "1") { mainWindow.webContents.openDevTools(); }
 
   // Emitted when the window is closed.
-  mainWindow.on("closed", function() {
+  mainWindow.on("closed", () => {
     // Dereference the window object, usually you would store windows
     // in an array if your app supports multi windows, this is the time
     // when you should delete the corresponding element.
@@ -58,14 +51,14 @@ function createWindow() {
   });
 
   // Disable new browser windows and popups
-  mainWindow.webContents.on("new-window", function(e, url) {
+  mainWindow.webContents.on("new-window", (e, url) => {
     e.preventDefault();
     providers.run(mainWindow, url);
     mainWindow.focus();
   });
 
-  let actionManager = new ActionManager(mainWindow)
-  actionManager.applyActions()
+  const actionManager = new ActionManager(mainWindow);
+  actionManager.applyActions();
 
   // DEPRECATED, Doesn't Work. TODO: Test before removing
   // globalShortcut.register("Alt+Shift+T", () => {
@@ -74,7 +67,7 @@ function createWindow() {
   // });
 }
 
-let createMenuTray = () => {
+const createMenuTray = () => {
   tray = new Tray(__dirname + "/assets/images/tray.png");
 
   const trayMenus = [
@@ -83,20 +76,20 @@ let createMenuTray = () => {
       label: "Exit Fullscreen",
       click() {
         fullscreenToggle(mainWindow, true);
-      }
+      },
     },
     {
       label: "Quit",
       click() {
         app.quit();
-      }
+      },
     },
     {
       label: "Bring H2 to the front",
       click() {
         utils.resetWindowToFloat(mainWindow);
-      }
-    }
+      },
+    },
   ];
 
   const contextMenu = Menu.buildFromTemplate(trayMenus);
@@ -104,8 +97,7 @@ let createMenuTray = () => {
   tray.setToolTip("H2");
   tray.setContextMenu(contextMenu);
   tray.setTitle("H2");
-  tray.on("click", function(event) {
-    console.log("called");
+  tray.on("click", (event) => {
     !mainWindow.isFocused() ? mainWindow.focus() : true;
   });
 };
@@ -127,7 +119,7 @@ app.on("will-quit", () => {
 });
 
 // Quit when all windows are closed.
-app.on("window-all-closed", function() {
+app.on("window-all-closed", () => {
   // On OS X it is common for applications and their menu bar
   // to stay active until the user quits explicitly with Cmd + Q
   // if (process.platform !== 'darwin') {
@@ -139,7 +131,7 @@ app.on("will-quit", () => {
   globalShortcut.unregisterAll();
 });
 
-app.on("activate", function() {
+app.on("activate", () => {
   // On OS X it's common to re-create a window in the app when the
   // dock icon is clicked and there are no other windows open.
   if (mainWindow === null) {
@@ -151,13 +143,11 @@ ipcMain.on("exit-full-screen", () => {
   fullscreenToggle(mainWindow, true);
 });
 
-ipcMain.on("openLink", (ev, arg) => {
-  console.log(arg)
-  mainWindow.loadURL(arg)
+ipcMain.on("openLink", (ev, arg: string) => {
+  mainWindow.loadURL(arg);
   mainWindow.webContents.on("did-finish-load", (event, url) => {
-    console.log('asking')
-    mainWindow.webContents.send("send-full-screen", "ping")
-  })
+    mainWindow.webContents.send("send-full-screen", "ping");
+  });
 });
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and require them here.

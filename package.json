@@ -4,9 +4,10 @@
   "description": "A mini browser to embed on top of screens",
   "main": "src/main.js",
   "scripts": {
-    "start": "electron .",
-    "build": "electron-builder --win --linux --mac -p never",
-    "lint": "eslint ./src/**/*.js ./tests/**/*.js",
+    "build": "tsc",
+    "watch": "tsc -w",
+    "lint": "tslint -c tslint.json -p tsconfig.json",
+    "start": "npm run build && electron ./dist/main.js",
     "lint:fix": "eslint ./src/**/*.js ./tests/**/*.js --fix",
     "test": "mocha tests/spec.js --timeout 30000"
   },
@@ -21,20 +22,22 @@
     "embed"
   ],
   "author": "poush",
-   "license": "CC0-1.0",
-   "devDependencies": {
-     "chai": "^4.2.0",
-     "chai-as-promised": "^7.1.1",
-     "electron": "^2.0.0",
-     "electron-builder": "^20.28.4",
-     "eslint": "^5.7.0",
-     "eslint-config-standard": "^12.0.0",
-     "eslint-plugin-import": "^2.14.0",
-     "eslint-plugin-node": "^7.0.1",
-     "eslint-plugin-promise": "^4.0.1",
-     "eslint-plugin-standard": "^4.0.0",
-     "mocha": "^5.2.0",
-     "spectron": "^4.0.0"
-   },
-   "dependencies": {}
- }
+  "license": "CC0-1.0",
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "chai-as-promised": "^7.1.1",
+    "electron": "^2.0.0",
+    "electron-builder": "^20.28.4",
+    "eslint": "^5.7.0",
+    "eslint-config-standard": "^12.0.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-node": "^7.0.1",
+    "eslint-plugin-promise": "^4.0.1",
+    "eslint-plugin-standard": "^4.0.0",
+    "mocha": "^5.2.0",
+    "spectron": "^4.0.0",
+    "tslint": "^5.19.0",
+    "typescript": "^3.6.0"
+  },
+  "dependencies": {}
+}
