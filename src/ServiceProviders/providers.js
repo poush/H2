@@ -3,30 +3,34 @@ const vimeoProvider = require('./MediaProviders/vimeo')
 const pdfProvider = require('./MediaProviders/pdf')
 const docsProvider = require('./MediaProviders/docs')
 const applyMedia = require('./mediaProviderApplier')
-const { clipboard } = require('electron')
 
 let matchers = {
-  youtube: new youtubeProvider(),
-  pdf: new pdfProvider(),
-  docs: new docsProvider(),
-  'vimeo': new vimeoProvider()
+
+  clipboard: {
+    youtube: new youtubeProvider(),
+    pdf: new pdfProvider(),
+    docs: new docsProvider(),
+    vimeo: new vimeoProvider()
+  }
+
 }
 
 module.exports = {
-  run (win) {
-    let text = clipboard.readText('selection')
+  run(context) {
+
+    const runners = matchers[context.type];
 
     let provider = null
-    for (let key in matchers) {
-      if (matchers[key].matcher(text) !== false) {
-        provider = key
-        break
+    let executed = false;
+
+    for (let runner in runners) {
+      if (runners.matcher(context) !== false) {
+        runner.text = 
       }
     }
-
-    if (provider == null) {
-      win.webContents.send('invalidUrl', 'ping')
-      return
+    if (executed === false) {
+      context.webContents.send('invalidUrl', 'ping')
+      return false;
     }
 
     matchers[provider].text = text

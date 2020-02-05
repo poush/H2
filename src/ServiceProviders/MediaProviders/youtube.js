@@ -8,7 +8,11 @@ class youtubeProvider extends baseMediaProvider {
     this.response.eventName = "youtube";
   }
 
-  matcher(link) {
+  matcher(context) {
+    if (context.contentType !== 'text') {
+      return false;
+    }
+    const link = context.content;
     if (link != undefined || link != "") {
       var regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=|\?v=)([^#\&\?]*).*/;
       var match = link.match(regExp);

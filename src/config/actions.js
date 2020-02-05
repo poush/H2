@@ -1,7 +1,8 @@
-const {app} = require("electron");
+const { app } = require("electron");
 
 const providers = require("../ServiceProviders/providers");
 const fullscreenToggle = require("../lib/fullscreen-toggle");
+const { clipboard } = require('electron')
 
 
 module.exports = {
@@ -9,8 +10,15 @@ module.exports = {
     {
       key: "CommandOrControl+Shift+V",
       action: (mainWin) => {
+        // this action is to read clipboard
+        const context = {
+          type: 'clipboard',
+          contentType: 'text',
+          content: clipboard.readText('selection'),
+          webContents: mainWin.webContents
+        }
         return () => {
-          providers.run(mainWin);
+          providers.run(context);
         }
       }
     },
