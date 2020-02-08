@@ -1,6 +1,6 @@
 import { WebContents } from "electron";
 
-export default class ContextResource {
+export class ContextResource {
 
     // @TODO it should be enum/class of supported platforms
     public platform: string;

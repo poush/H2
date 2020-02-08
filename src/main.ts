@@ -1,17 +1,19 @@
 import { app, BrowserWindow, BrowserWindowConstructorOptions, globalShortcut, ipcMain, Menu, session, Tray } from "electron";
+import path from "path";
 
-const providers = require("./ServiceProviders/providers");
-const fullscreenToggle = require("./lib/fullscreen-toggle");
-const utils = require("./lib/util");
-const path = require("path");
-const ActionManager = require("./core/action-manager");
+// const providers = require("./ServiceProviders/providers");
+// const fullscreenToggle = require("./lib/fullscreen-toggle");
+// const utils = require("./lib/util");
+// const ActionManager = require("./core/action-manager");
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
-let mainWindow: BrowserWindow = null;
-let tray;
 
-function createWindow() {
+
+let mainWindow: BrowserWindow = null;
+let tray: Tray;
+
+function createWindow(): void {
 
   // create config
   const config: BrowserWindowConstructorOptions = {

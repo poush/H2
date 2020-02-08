@@ -4,8 +4,9 @@
 import { ipcRenderer } from "electron";
 
 
-const notif = require("./lib/notifications");
+// const notif = require("./lib/notifications");
 
+// Renderer.ts is responsible to register output services
 let player;
 
 
@@ -83,7 +84,7 @@ function defaultiFrame(arg) {
 
 window.addEventListener("keyup", function (e) {
   if (e.key == "Escape") {
-    ipcRenderer.send('exit-full-screen')
+    ipcRenderer.send("exit-full-screen");
   }
 });
 
@@ -99,7 +100,7 @@ ipcRenderer.on("youtube", async (ev, arg) => {
   frame.addEventListener("load", function () {
     setTimeout(() => {
       if (document.getElementById("video").contentDocument.querySelector(".ytp-error-content-wrap-reason")) {
-        ipcRenderer.send('openLink', 'https://youtube.com/watch?v=' + arg)
+        ipcRenderer.send("openLink", "https://youtube.com/watch?v=" + arg);
       }
     }, 2000);
   });
@@ -118,7 +119,7 @@ ipcRenderer.on("invalidUrl", () => {
 });
 
 ipcRenderer.on("alertUser", (event, message, url) => {
-  let userInput = confirm(message);
+  const userInput = confirm(message);
   if (userInput == true) {
     alert(
       `Step 1. Copy the URL\nStep 2. Open in your favorite browser.\n\n${url}`,
