@@ -1,34 +1,34 @@
 import { globalShortcut, BrowserWindow } from 'electron';
 import { Action } from './action';
 import * as extensions from "../config/extensions.json";
+
 /**
  * A global action manager, which is responsible for listening
  * actions that can be managed by H2
  */
-export default class ActionManager {
-  private mainWin: BrowserWindow
-  private actions: Action[]
-  private globals: Array<any>
+class ActionManager {
+  private static instance: ActionManager;
 
-  constructor(mainWin: BrowserWindow) {
-    this.mainWin = mainWin;
+  private actions: Action[];
+  private globals: Array<any>;
+
+  private constructor() {
     this.globals = [];
     this.actions = []
-
-    this.registerActions()
   }
 
-  registerActions() {
-
+  public static get_instance() {
+    if (!ActionManager.instance) {
+      ActionManager.instance = new ActionManager()
+    }
+    return ActionManager.instance;
   }
 
-  applyActions() {
-    this.actions['keys'].forEach((key) => {
-
-      this.globals.push(
-        globalShortcut.register(key.key, key.action(this.mainWin))
-      )
-
-    })
+  registerActions(extensions: IExtensions) {
+    
   }
 }
+
+const manager = ActionManager.get_instance();
+manager.registerActions(extensions);
+export default manager;
