@@ -1,5 +1,5 @@
-import ContextResource from "src/core/context-resource";
-import { ActionTypes } from "src/core/interfaces/action-types";
+import { ActionTypes } from "./interfaces/action-types";
+import ContextResource from "./context-resource"
 
 export abstract class Action {
 
